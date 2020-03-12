@@ -338,6 +338,7 @@ a:hover {
 
 .textarea-about, .textarea-about:focus {
     outline: none;
+    width: 100%;
     resize: none;
     color: white;
     border: none;
@@ -345,11 +346,9 @@ a:hover {
 }
 
 .textarea-about::-webkit-scrollbar {
-	-webkit-appearance: none;
-	width: 7px;
+	width: 0.25rem;
 }
 .textarea-about::-webkit-scrollbar-thumb {
-	border-radius: 2px;
 	background-color: rgba(255, 255, 255, 0.7);
 }
 
