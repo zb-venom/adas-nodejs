@@ -6,6 +6,7 @@ const userSchema = new Schema({
     email: String,
     phone: String,
     about: String,
+    new_password: Boolean,
     type: {
         type: Number,
         default: 0

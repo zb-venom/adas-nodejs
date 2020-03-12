@@ -28,7 +28,7 @@ function seepass() {
     }
 }
 setInterval(()=>{  
-    if ($("#login").val().length >= 5 && $("#password").val().length >= 8)
+    if ($("#login").val().length >= 3 && $("#password").val().length >= 8)
         $("#in").attr("disabled", false);
     else 
         $("#in").attr("disabled", true);

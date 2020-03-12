@@ -60,12 +60,13 @@
                 <span class="creat-new" onclick="close()">+</span>
             </div>
             <div class="device-box" id="new_form" style="display: none">
-                <form action="/add_user" method="post">
-                    <input type="text" class="input-simple" name="login" placeholder="Логин">
+                <form action="/users/add" method="post">
+                    <input type="text" style="margin: 0;" class="input-simple" name="login" placeholder="Логин">
                     <hr>
-                    <input type="text" class="input-simple" name="name" placeholder="Информация">
-                    <input type="text" class="input-simple" name="name" placeholder="Мыло">
-                    <input type="text" class="input-simple" name="name" placeholder="Телефон">
+                    <input type="text" style="margin: 0;" class="input-simple" name="about" placeholder="Информация"><br>
+                    <input type="text" class="input-simple" name="email" placeholder="Мыло"><br>
+                    <input type="text" class="input-simple" name="phone" placeholder="Телефон"><br>
+                    <input type="text" class="input-simple" name="new_code" value="{{new_code}}" disabled><input type="text" value="{{new_code}}" name="code" hidden><br>
                     <h6 style="margin-top: .5rem;">Тип: 
                         <select name="type" class="select-type">
                             <option value="0" disabled>Не подтвержден</option>
@@ -73,7 +74,9 @@
                             <option value="1">Администратор</option>
                         </select>
                     </h6>
-                    <button type="submit" class="save-edit">Add</button>    
+                    <code>Пароль для первого входа:</code><br>
+                    <code class="green">1234567890</code><br><br>
+                    <button type="submit" style="margin-left: 12rem; margin-top: 1rem;" class="save-edit">Add</button>    
                 </form>
             </div>
         </div>

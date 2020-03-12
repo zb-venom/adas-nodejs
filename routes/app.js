@@ -363,6 +363,7 @@ router.get('/users', async (req, res) => {
         online: req.cookies.online, 
         admin: req.cookies.admin,
         none: req.cookies.none,
+        new_code: new_code,
         have
     })
 })
@@ -396,6 +397,7 @@ router.get('/users/:search', async (req, res) => {
         online: req.cookies.online, 
         admin: req.cookies.admin,
         none: req.cookies.none,
+        new_code: new_code,
         have
     })
 })
@@ -414,12 +416,41 @@ router.post('/users/edit', async (req, res) => {
         const user = await userSchema.findOneAndUpdate({_id: req.body._id}, {
             about: req.body.about,
             type: req.body.type,
-            login: req.body.login,
+            login: req.body.login.toLocaleLowerCase(),
             email: req.body.email,
             phone: req.body.phone,
             code: req.body.code
         })
         res.redirect('/users')
+    }
+    else res.redirect('/users')
+})
+
+
+router.post('/users/add', async (req, res) => {
+    if (!req.cookies.online) { res.redirect('/'); return 0; }
+    if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
+    console.log(req.body.about + req.body.login + req.body.email 
+        + req.body.type + req.body.phone + req.body.code);
+    
+    if (req.body.about && req.body.login && req.body.email 
+        && req.body.type && req.body.phone && req.body.code) {  
+        const user = await userSchema.findOne({_id: req.body._id})
+        if (user) { res.redirect('/users'); return 0;}
+        else {          
+            const new_user = new userSchema({
+                about: req.body.about,
+                login: req.body.login.toLocaleLowerCase(),
+                email:  req.body.email,
+                phone:  req.body.phone,
+                type: req.body.type,
+                code: req.body.code,
+                new_password: true,
+                password:  md5('1234567890')
+            })
+            await new_user.save();
+            res.redirect('/users')
+        }
     }
     else res.redirect('/users')
 })
