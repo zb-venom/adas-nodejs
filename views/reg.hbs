@@ -45,8 +45,8 @@ setInterval(()=>{
         $("#password").removeClass('input-tr');
         $("#password2").removeClass('input-tr');
     }
-    if ($("#about").val().length >= 15 && $("#login").val().length >= 5 && 
-    $("#email").val().length >= 8 && $("#phone").val().length == 17 && 
+    if ($("#about").val().length >= 5 && $("#login").val().length >= 3 && 
+    $("#email").val().length >= 6 && $("#phone").val().length == 17 && 
     $("#password").val().length >= 8 && $("#password").val() == $("#password2").val())
         $("#in").attr("disabled", false);
     else 

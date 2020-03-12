@@ -78,7 +78,7 @@ router.post('/auth', async (req, res) => {
             if (user.type == 1)
                 res.cookie('admin', 'admin')                
             if (user.type == 0)
-                res.cookie('none', 'none')
+                res.cookie('none', 'none');                
             res.cookie('online', 'online')
             res.redirect('/lk')
         } else {
@@ -116,6 +116,7 @@ router.get('/lk', async (req, res) => {
         title: 'Личный кабинет',
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         user: user,
         have
     })
@@ -139,6 +140,7 @@ router.get('/search', async (req, res) => {
         Search: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         device
     })
 })
@@ -167,6 +169,7 @@ router.get('/search/:search', async (req, res) => {
         Search: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         search: req.params.search,
         device
     })
@@ -186,6 +189,7 @@ router.get('/edit', async (req, res) => {
         Edit: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         device
     })
 })
@@ -205,6 +209,7 @@ router.get('/edit/:search', async (req, res) => {
         Edit: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         search: req.params.search,
         device
     })
@@ -254,6 +259,7 @@ router.get('/devices', async (req, res) => {
         Devices: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         have
     })
 })
@@ -280,6 +286,7 @@ router.get('/devices/:search', async (req, res) => {
         Devices: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         search: req.params.search,
         have
     })
@@ -335,6 +342,7 @@ router.get('/users', async (req, res) => {
         Users: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         have
     })
 })
@@ -367,6 +375,7 @@ router.get('/users/:search', async (req, res) => {
         Users: true,
         online: req.cookies.online, 
         admin: req.cookies.admin,
+        none: req.cookies.none,
         have
     })
 })
