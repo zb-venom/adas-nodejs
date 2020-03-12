@@ -64,11 +64,11 @@
             </div>
             <div class="device-box" id="new_form" style="display: none">
                 <form action="/users/add" method="post">
-                    <input type="text" style="margin: 0;" class="input-simple" name="login" placeholder="Логин">
+                    <input type="text" style="margin: 0;" class="input-simple" name="login" placeholder="Логин" required>
                     <hr>
-                    <input type="text" style="margin: 0;" class="input-simple" name="about" placeholder="Информация"><br>
-                    <input type="text" class="input-simple" name="email" placeholder="Мыло"><br>
-                    <input type="text" class="input-simple" name="phone" placeholder="Телефон"><br>
+                    <input type="text" style="margin: 0;" class="input-simple" name="about" placeholder="Информация" required><br>
+                    <input type="email" class="input-simple" name="email" placeholder="Мыло" required><br>
+                    <input type="text" class="input-simple" name="phone" id="phone" placeholder="Телефон" required><br>
                     <input type="text" class="input-simple" name="new_code" value="{{new_code}}" disabled><input type="text" value="{{new_code}}" name="code" hidden><br>
                     <h6 style="margin-top: .5rem;">Тип: 
                         <select name="type" class="select-type">
@@ -87,6 +87,11 @@
 </div>  
 
 <script>
+        
+$(function(){
+  $("#phone").mask('+7(000)-000-00-00');  
+});
+
 $("#new_span").click(function(){
     $('#new_span').hide();
     $('#new_form').show();

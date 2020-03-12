@@ -24,9 +24,19 @@ router.get('/auth', async (req, res) => {
     if (req.cookies.online) res.redirect('/lk');
     else  {
         res.render('auth', {
-            title: 'Авторизация',
-            phone: req.cookies.phone, 
-            admin: req.cookies.admin
+            title: 'Авторизация'
+        })
+    }
+})
+
+router.get('/new_password/:hash', async (req, res) => {
+    if (req.cookies.online) { res.redirect('/lk'); return 0; } 
+    if (req.cookies.hash_lp != req.params.hash) { res.redirect('/auth'); return 0; } 
+    else  {
+        res.render('new_password', {
+            title: 'Смена пароля',
+            login: req.cookies.login,
+            hash: req.params.hash
         })
     }
 })
@@ -49,6 +59,11 @@ router.post('/reg', async (req, res) => {
             title: 'Регистрация',
             error: 'ОШИБКА! Данный пользователь уже зарегистрирован.'
         }) 
+    } else if (req.body.password == md5('1234567890')) {
+        res.render('reg', {
+            title: 'Регистрация',
+            error: 'ОШИБКА! Пароль не должен совпадать со стандартным.'
+        })
     }
     else {
         const new_user = new userSchema({
@@ -63,8 +78,27 @@ router.post('/reg', async (req, res) => {
     }    
 })
 
+router.post('/new_password/:hash', async (req, res) => {
+    if (req.cookies.online) { res.redirect('/lk'); return 0 }    
+    if (req.cookies.hash_lp != req.params.hash) { res.redirect('/auth'); return 0 } 
+    const user = await userSchema.findOne({'_id': req.cookies._id, 'new_password': true})
+    if (!user) { res.redirect('/auth'); return 0 }     
+    if (user.password == md5(req.body.password)) {  
+        res.render('new_password', {
+            title: 'Смена пароля',
+            login: req.cookies.login,
+            hash: req.params.hash,
+            error: "ОШИБКА! Новый пароль не должен совпадать со стандартным!"
+        })
+    } else { 
+        res.clearCookie('has_lp')        
+        const user = await userSchema.findOneAndUpdate({'_id': req.cookies._id}, {'password': md5(req.body.password), 'new_password': false})
+        res.redirect('/auth')
+    }
+})
+
 router.post('/auth', async (req, res) => {
-    if (req.cookies.online) res.redirect('/lk');
+    if (req.cookies.online) { res.redirect('/lk'); return 0 }
     const user = await userSchema.findOne({$or: [{login: req.body.login.toLocaleLowerCase()}, {email: req.body.login}]})
     if (!user) {
         res.render('auth', {
@@ -72,13 +106,19 @@ router.post('/auth', async (req, res) => {
             error: 'ОШИБКА! Данный логин не существует или введён неверно.'
         }) 
     } else {
-        if (md5(req.body.password) == user.password){
-            res.cookie('login', user.login)
+        if (md5(req.body.password) == user.password){            
+            res.clearCookie('has_lp')
+            res.clearCookie('online')
+            res.clearCookie('admin')
+            res.clearCookie('none')  
+            res.cookie('_id', user._id)
+            res.cookie('login', user.login)           
+            if (user.new_password) { hash = md5(md5(user.login) + md5(Date.now.toString())); res.cookie('hash_lp', hash); res.redirect('/new_password/'+hash); return 0; }
             res.cookie('type', user.type)
             if (user.type == 1)
                 res.cookie('admin', 'admin')                
             if (user.type == 0)
-                res.cookie('none', 'none');                
+                res.cookie('none', 'none');           
             res.cookie('online', 'online')
             res.redirect('/lk')
         } else {
@@ -93,6 +133,7 @@ router.post('/auth', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     if (req.cookies.online) {
+        res.clearCookie('has_lp')
         res.clearCookie('online')
         res.clearCookie('admin')
         res.clearCookie('none')
@@ -426,7 +467,6 @@ router.post('/users/edit', async (req, res) => {
     else res.redirect('/users')
 })
 
-
 router.post('/users/add', async (req, res) => {
     if (!req.cookies.online) { res.redirect('/'); return 0; }
     if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
@@ -452,7 +492,7 @@ router.post('/users/add', async (req, res) => {
     else res.redirect('/users')
 })
 
-router.post('/users/delete', async (req, res) => {
+router.post('/users/add', async (req, res) => {
     if (!req.cookies.online) { res.redirect('/'); return 0; }
     if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
     const user = await userSchema.deleteOne({_id: req.body._id})
