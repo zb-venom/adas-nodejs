@@ -55,5 +55,34 @@
             </div>
         </div>
         {{/if}}
+        <div class="col">
+            <div class="new-device-box" id="new_span">
+                <span class="creat-new" onclick="close()">+</span>
+            </div>
+            <div class="device-box" id="new_form" style="display: none">
+                <form action="/add_user" method="post">
+                    <input type="text" class="input-simple" name="login" placeholder="Логин">
+                    <hr>
+                    <input type="text" class="input-simple" name="name" placeholder="Информация">
+                    <input type="text" class="input-simple" name="name" placeholder="Мыло">
+                    <input type="text" class="input-simple" name="name" placeholder="Телефон">
+                    <h6 style="margin-top: .5rem;">Тип: 
+                        <select name="type" class="select-type">
+                            <option value="0" disabled>Не подтвержден</option>
+                            <option value="2">Студент</option>
+                            <option value="1">Администратор</option>
+                        </select>
+                    </h6>
+                    <button type="submit" class="save-edit">Add</button>    
+                </form>
+            </div>
+        </div>
     </div>
 </div>  
+
+<script>
+$("#new_span").click(function(){
+    $('#new_span').hide();
+    $('#new_form').show();
+});
+</script>
