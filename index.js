@@ -25,10 +25,15 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(appRoutes)
 app.use(cookieParser('secret key'))
 
+
+
+const db = 'mongodb+srv://'+config.login+':'+config.password+'@'+config.cluster+'/adas';
+
+
 async function start() {
     try {
         await mongoose.connect(
-            'mongodb+srv://'+config.bd.login+':'+config.bd.password+'@'+config.bd.claster+'/adas',
+            db,
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
