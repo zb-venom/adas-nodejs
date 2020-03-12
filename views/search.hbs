@@ -1,0 +1,52 @@
+<div class="con-search">
+    <form method="POST" action="/search" class="search-form">
+        <input type="text" class="input-search" name="search" value="{{search}}" placeholder="Поиск">
+        <button type="submit" class="start-search"></button>
+    </form>
+    <div class="row">
+        {{#if device}}
+            {{#each device}}
+                <div class="col">
+                    <div class="device-box">
+                        <h4>{{name}}</h4>
+                        <hr>
+                        <div class="scroll-about">
+                            <code class="simple">{{about}}</code>
+                        </div>
+                        <div class="auditory">
+                            {{#if count_404}}
+                                <code class="green">{{count_404}} в 404</code><br>
+                            {{/if}}
+                            {{#if count_707}}
+                                <code class="green">{{count_707}} в 707</code><br>
+                                {{#if count_404}}
+                                {{else}}
+                                    <br>
+                                {{/if}}
+                            {{else}}
+                                {{#if count_none}}
+                                    <code class="red">Оборудование отсутвует.</code>
+                                    <br>
+                                    <br>
+                                {{else}}
+                                    <br>
+                                {{/if}}
+                            {{/if}}
+                        </div>                        
+                        <a href="/search/{{type}}" title="Искать по {{type}}"><span class="device-type">{{type}}</span></a>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+        <div class="col">
+            <div class="device-box">
+                <h2>Ошибка.</h2>
+                <hr>
+                <div class="scroll-about">
+                    <code class="red">По вашему запросу ничего не найдено.</code>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>  

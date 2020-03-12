@@ -1,0 +1,43 @@
+<div class="con-search">
+    <form method="POST" action="/devices" class="search-form">
+        <input type="text" class="input-search" name="search" value="{{search}}" placeholder="Поиск">
+        <button type="submit" class="start-search"></button>
+    </form>
+    <div class="row">
+        {{#if have}}
+            {{#each have}}
+                <div class="col">
+                    <div class="device-box">
+                        <form action="/device/add" method="post">
+                            <h6>{{name}}</h6>
+                            <code class="green"><-Добавить-></code><br>
+                            <code>{ Код: <input type="text" class="new-code" value="{{new_code}}" disabled> => Аудитория:
+                                <select name="auditory" class="select-auditory">
+                                    <option value="404">404</option>
+                                    <option value="707">707</option>
+                                </select> } <button class="save-button" type="submit">+ добавить</button></code><br><code class="green"><-На местах-></code>
+                            <div class="scroll-about">                            
+                                {{#each auditory}}
+                                        <code>{ Код: {{code}} => Аудитория: {{auditory}} }</code><br><code class="green"><--------------></code><br>
+                                {{/each}}  
+                            </div>       
+                            <a href="/devices/{{type}}" title="Искать по {{type}}"><span class="device-type">{{type}}</span></a> 
+                            <input type="text" name="code" value="{{new_code}}" hidden>  
+                            <input type="text" name="_id" value="{{_id}}" hidden>  
+                        </form>              
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+        <div class="col">
+            <div class="device-box">
+                <h2>Ошибка.</h2>
+                <hr>
+                <div class="scroll-about">
+                    <code class="red">По вашему запросу ничего не найдено.</code>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>  

@@ -1,0 +1,36 @@
+<div class="index" style="padding: 1rem 0 1rem 0">
+    <div class="text-center">
+        <h1>Авторизация</h1>
+        <h5>Введите данные</h5>
+        {{#if error}}        
+            <div class="alert alert-danger" role="alert">
+            <a class="reg-link" href="/auth" style="color: black"> {{error}} Войти.</a>
+            </div>
+        {{/if}}
+        <form action="/auth" method="post">
+            <input type="text" id="login" name="login" placeholder="Логин" autocomplete="off" required><br>
+            <input type="password" id="password" name="password" placeholder="Пароль" onKeyUp="this.value = this.value.replace(/[^a-zA-Z0-9?!,._\-@#]/,'');" required><br>
+            <button type="button" id="see" onclick="seepass()" >Показать пароль</button>
+            <button type="submit" id="in" >Продолжить</button>
+        </form>
+        <a class="reg-link" href="/reg">Нет акаунта? Регистрация.</a>  
+    </div>
+</div>
+
+<script>   
+function seepass() {
+    if ($("#password").prop('type') == 'password') {
+        $("#password").attr('type','text');
+        $("#see").html('Скрыть пароль');
+    } else {
+        $("#password").attr('type','password');
+        $("#see").html('Показать пароль');
+    }
+}
+setInterval(()=>{  
+    if ($("#login").val().length >= 5 && $("#password").val().length >= 8)
+        $("#in").attr("disabled", false);
+    else 
+        $("#in").attr("disabled", true);
+}, 500)
+</script>

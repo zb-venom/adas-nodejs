@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/lk">ADAS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        {{#if Search}}
+          <li class="nav-item active">
+            <a class="nav-link" href="/search">Поиск оборудования</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/search">Поиск оборудования</a>
+          </li>
+        {{/if}}
+        {{#if admin}}
+          {{#if Edit}}
+            <li class="nav-item active">
+              <a class="nav-link" href="/edit">Редактирование</a>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              <a class="nav-link" href="/edit">Редактирование</a>
+            </li>
+          {{/if}}
+          {{#if Devices}}
+            <li class="nav-item active">
+              <a class="nav-link" href="/devices">Оборудование</a>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              <a class="nav-link" href="/devices">Оборудование</a>
+            </li>
+          {{/if}}
+          {{#if Users}}
+            <li class="nav-item active">
+              <a class="nav-link" href="/users">Пользователи</a>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              <a class="nav-link" href="/users">Пользователи</a>
+            </li>
+          {{/if}}
+        {{/if}}
+      </ul>
+      <form class="form-inline my-2 my-lg-0">      
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" style="color: rgb(109, 184, 106)" href="/lk">Личный кабинет</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: rgb(184, 106, 106)" href="/logout">Выйти</a>
+            </li>
+          </ul>                
+        </form>
+    </div>
+  </div>
+</nav>

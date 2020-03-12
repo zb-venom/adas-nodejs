@@ -1,0 +1,20 @@
+{{> head }}
+<body>
+    {{#if online}}
+        {{> navbar}}
+        {{#if none}}        
+        <div class="content">
+            {{> none}}
+        </div>
+        {{else}}
+        <div class="content">
+            {{{ body }}}
+        </div>
+        {{/if}}
+    <!--{{> footer}}-->
+    {{else}}
+        {{{ body }}}
+    {{/if}}
+    <div class="made-by">made by Venom</div>
+</body>
+</html>

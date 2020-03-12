@@ -1,0 +1,55 @@
+<div class="index" style="padding: 1rem 0 1rem 0">
+    <div class="text-center">
+        <h1>Регистрация</h1>
+        <h5>Введите данные</h5>
+        {{#if error}}        
+            <div class="alert alert-danger" role="alert">
+            <a class="reg-link" href="/auth" style="color: black"> {{error}} Войти.</a>
+            </div>
+        {{/if}}
+        <form action="/reg" method="post" autocomplete="off">
+            <input type="text" id="about" name="about" placeholder="ФИО, № группы" alt="Введите полное Фамилию, Имя, Отчество и номер группы" required>
+            <input type="text" id="login" name="login" placeholder="Логин"  required><br>
+            <input type="email" id="email" name="email" placeholder="e-mail"  required>
+            <input type="tel" id="phone" name="phone" placeholder="Телефон"  required><br>
+            <input type="password" id="password" name="password" placeholder="Пароль" onKeyUp="this.value = this.value.replace(/[^a-zA-Z0-9?!,._\-@#]/,'');" required>
+            <input type="password" id="password2" placeholder="Повторите пароль" onKeyUp="this.value = this.value.replace(/[^a-zA-Z0-9?!,._\-@#]/,'');" required><br>
+        <small>Пароль должен содержать как минимум <br>8 латинских символов, цифр и знаков: ?!,._-@#</small><br>
+            <button type="button" id="see" onclick="seepass()" >Показать пароль</button>
+            <button type="submit" id="in" >Продолжить</button>
+        </form>
+        <a class="reg-link" href="/auth">Уже зареистрированны? Войти.</a>  
+    </div>
+</div>
+
+<script>    
+$(function(){
+  $("#phone").mask('+7(000)-000-00-00');  
+});
+function seepass() {
+    if ($("#password").prop('type') == 'password') {
+        $("#password").attr('type','text');
+        $("#see").html('Скрыть пароль');
+        $("#password2").attr('type','text');
+    } else {
+        $("#password").attr('type','password');
+        $("#see").html('Показать пароль');
+        $("#password2").attr('type','password');
+    }
+}
+setInterval(()=>{     
+    if ($("#password").val() != $("#password2").val()){
+        $("#password").addClass('input-tr');
+        $("#password2").addClass('input-tr');
+    } else {
+        $("#password").removeClass('input-tr');
+        $("#password2").removeClass('input-tr');
+    }
+    if ($("#about").val().length >= 15 && $("#login").val().length >= 5 && 
+    $("#email").val().length >= 8 && $("#phone").val().length == 17 && 
+    $("#password").val().length >= 8 && $("#password").val() == $("#password2").val())
+        $("#in").attr("disabled", false);
+    else 
+        $("#in").attr("disabled", true);
+}, 500)
+</script>

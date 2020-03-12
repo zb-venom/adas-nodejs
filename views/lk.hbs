@@ -1,0 +1,43 @@
+<div class="con">
+    <div class="row">
+        <div class="col">
+            <div class="user-box">
+                <h2>Профиль</h2>
+                <hr>
+                {{#if user}}
+                    <h6>ID: {{user._id}}</h6>
+                    <h6>Логин: {{user.login}}</h6>
+                    <h6>Инфо: {{user.about}}</h6>
+                    <h6>Мыло: {{user.email}}</h6>
+                    <h6>Тел: {{user.phone}}</h6>
+                    <div style="margin: 1rem; text-align: center;" >
+                        <input type="text" class="input-code" value="{{user.code}}" disabled><br><br>
+                        <a href="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data={{user.code}}&download=true" target="_blank" rel="noopener noreferrer" download><img src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&amp;data={{user.code}}&bgcolor=7-7-27&color=0-200-0"></a>
+                    </div>
+                {{else}}
+                <h6>Error</h6>
+                {{/if}}
+            </div>
+        </div>
+        <div class="col">
+            <div class="info-box">
+                <h2>У вас на руках</h2>
+                <hr>
+                {{#if have}}                    
+                    {{#each have}}
+                        <code class="info-text">{   
+    Наименование: <code class="green">{{name}}</code>
+    Код: <code class="green">{{code}}</code>
+    Аудитория: <code class="green">{{auditory}}</code>
+}
+</code>
+                    {{/each}}
+                {{else}}
+                    <a href="/search"><code>LOG:</code>
+                    <code>Вы ещё ничего не получали</code>
+                    <code>перейти к поиску...</code></a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
