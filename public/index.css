@@ -474,3 +474,8 @@ a:hover {
     border: none; 
     background-color: rgb(7, 7, 27);
 }
+
+.colse:focus, .close:active {
+    border: none;
+    outline: none !important;
+}

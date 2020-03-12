@@ -8,7 +8,10 @@
             {{#each have}}
                 <div class="col">
                     <div class="user-box">
-
+                        <form onsubmit="return shure()" action="/users/delete" method="post" class="delete">
+                            <input type="text" name="_id" value="{{_id}}" hidden>
+                            <button type="submit" class="close" style="color: white; margin-top: -.5rem" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </form>
                         <form action="/users/edit" method="post">
                             <h6>Логин: {{login}}</h6> <input type="text" name="login" value="{{login}}" hidden>
                             <hr>
@@ -88,4 +91,8 @@ $("#new_span").click(function(){
     $('#new_span').hide();
     $('#new_form').show();
 });
+
+function shure() {
+    return confirm("Вы уверены?")  
+}
 </script>

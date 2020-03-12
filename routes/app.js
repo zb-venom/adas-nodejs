@@ -430,9 +430,6 @@ router.post('/users/edit', async (req, res) => {
 router.post('/users/add', async (req, res) => {
     if (!req.cookies.online) { res.redirect('/'); return 0; }
     if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
-    console.log(req.body.about + req.body.login + req.body.email 
-        + req.body.type + req.body.phone + req.body.code);
-    
     if (req.body.about && req.body.login && req.body.email 
         && req.body.type && req.body.phone && req.body.code) {  
         const user = await userSchema.findOne({_id: req.body._id})
@@ -453,6 +450,13 @@ router.post('/users/add', async (req, res) => {
         }
     }
     else res.redirect('/users')
+})
+
+router.post('/users/delete', async (req, res) => {
+    if (!req.cookies.online) { res.redirect('/'); return 0; }
+    if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
+    const user = await userSchema.deleteOne({_id: req.body._id})
+    res.redirect('/users')
 })
 
 module.exports = router
