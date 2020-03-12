@@ -299,6 +299,7 @@ a:hover {
 }
 
 .input-name, .input-name:focus {
+    width: 100%;
     text-align: center;
     font-size: 1.5rem;
     outline: none;
