@@ -11,7 +11,7 @@
                         <form action="/users/edit" method="post">
                             <h6>Логин: {{login}}</h6> <input type="text" name="login" value="{{login}}" hidden>
                             <hr>
-                            <h6>ID: {{_id}}</h6> <input type="text" name="_id" value="{{_id}}" hidden>
+                            <h6>ID: <a href="/lk/{{_id}}" target="_blank" rel="noopener noreferrer">{{_id}}</a></h6> <input type="text" name="_id" value="{{_id}}" hidden>
                             {{#if code}}
                                 <h6>Тип: {{full_type}}</h6> <input type="text" name="type" value="{{type}}" hidden>
                             {{else}}

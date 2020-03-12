@@ -122,6 +122,26 @@ router.get('/lk', async (req, res) => {
     })
 })
 
+router.get('/lk/:_id', async (req, res) => {
+    if (!req.cookies.online) { res.redirect('/'); return 0; }
+    if (!req.cookies.admin) { res.redirect('/lk'); return 0; } 
+    const user = await userSchema.findOne({_id: req.params._id}).lean()
+    const auditory = await auditorySchema.find({taken: user._id}).lean()
+    const have = []
+    for (i = 0; auditory.length > i; i++) {
+        var device = await deviceSchema.findOne({_id: auditory[i].device_id}).lean()
+        have[i] = Object.assign({name: device.name}, auditory[i])
+    }
+    res.render('lk', {
+        title: user.login,
+        online: req.cookies.online, 
+        admin: req.cookies.admin,
+        none: req.cookies.none,
+        user: user,
+        have
+    })
+})
+
 router.get('/search', async (req, res) => {
     if (!req.cookies.online) res.redirect('/');
     const device = await deviceSchema.find({}).lean() 
