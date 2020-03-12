@@ -492,7 +492,7 @@ router.post('/users/add', async (req, res) => {
     else res.redirect('/users')
 })
 
-router.post('/users/add', async (req, res) => {
+router.post('/users/delete', async (req, res) => {
     if (!req.cookies.online) { res.redirect('/'); return 0; }
     if (!req.cookies.admin) { res.redirect('/lk'); return 0; }
     const user = await userSchema.deleteOne({_id: req.body._id})

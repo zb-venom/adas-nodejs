@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "Venom",
   "license": "ISC",
-  "description": "",
+  "description": "Запустите файл **`install.exe`** для настройки конфигураций",
   "dependencies": {
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.4",
