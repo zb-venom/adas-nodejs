@@ -479,3 +479,7 @@ a:hover {
     border: none;
     outline: none !important;
 }
+
+.e404 {
+    font-size: 3rem;
+}
