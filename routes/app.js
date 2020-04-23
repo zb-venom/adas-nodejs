@@ -33,5 +33,10 @@ router.route('/user/add').post(adminController.addUser);
 router.route('/user/edit').post(adminController.editUser);
 router.route('/user/delete').post(adminController.deleteUser);
 
+router.get('/*', () => {
+    res.render('404',{
+        title: "Страница не найдена"
+    })
+})
 
 module.exports = router

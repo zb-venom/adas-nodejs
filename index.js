@@ -43,12 +43,6 @@ async function start() {
         app.listen(PORT, () => {
             console.log('\nСервер запущен...\nПриложение доступно по ссылке http://localhost:3000\n'.green)
         })
-        app.error(function(err, req, res, next){
-            res.render('404', {
-                title: '404 — Page maybe not found'
-              });
-            //next(err);
-        });
     } catch (e) {
         console.log(e)
     }
