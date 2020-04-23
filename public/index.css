@@ -1,6 +1,5 @@
 .made-by {
     color: white;
-    font-size: 0.7em;
     font-weight: bolder;
     position: fixed;
     right: 1rem;
@@ -8,8 +7,7 @@
 }
 
 .made-by:hover, .made-by:focus {
-    color: rgb(255, 121, 121);
-    font-size: 1em;
+    color: rgb(251, 89, 89);
     text-decoration: none;
 }
 
