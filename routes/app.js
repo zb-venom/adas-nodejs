@@ -33,7 +33,7 @@ router.route('/user/add').post(adminController.addUser);
 router.route('/user/edit').post(adminController.editUser);
 router.route('/user/delete').post(adminController.deleteUser);
 
-router.get('/*', () => {
+router.get('/*', (req, res) => {
     res.render('404',{
         title: "Страница не найдена"
     })
