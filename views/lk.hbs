@@ -44,11 +44,9 @@
             <div class="info-box">
                 <h2>Привязать акаунт</h2>
                 <hr>
-                <div id="vk_auth"></div>
-                <script type="text/javascript">
-                VK.init({apiId: 7441126});
-                VK.Widgets.Auth("vk_auth", {"onAuth":function(data) {console.log(data)}});
-                </script>
+                <div id="uLogin" data-ulogin="display=panel;
+                theme=flat;fields=first_name,last_name;providers=vkontakte,yandex,google;
+                hidden=;redirect_uri=https%3A%2F%2Fadas-tusur.herokuapp.com%2Fapi%2Fauth;mobilebuttons=0;"></div>
             </div>
         </div>
         {{/if}}
