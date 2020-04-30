@@ -292,6 +292,7 @@ exports.postApiSetUid = async (req, res) => {
             if (req.body.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
             if (req.body.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : req.body.uid})
             if (req.body.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' : req.body.uid})
+            res.redirect('/')
         }
     }         
     res.redirect('/') 
