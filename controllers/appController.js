@@ -238,29 +238,27 @@ exports.postSearch = async (req, res) => {
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
     console.log(req.body.token);
-    res.cookie('token', req.body.token);
-    var data;
     await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
     .then(function (resp) {
         console.log(resp.data.uid);           
         if (status.online)  {
-            axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
+            axios.post('/api/set/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
             });
         }
         else {
-            axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
+            axios.post('/api/get/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
-            });
+            })
         }
-    });   
+    });  
+    res.redirect('/'); 
 }
 
 exports.postApiGetUid = async (req, res) => {
     if (req.params.token) {
-        console.log(req.body.uid + '       ' + req.body.network)
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.clearCookie('_id');
@@ -285,7 +283,7 @@ exports.postApiGetUid = async (req, res) => {
 
 
 exports.postApiSetUid = async (req, res) => {
-    if (req.params.token == req.cookies.token) {
+    if (req.params.token) {
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.redirect('/')
