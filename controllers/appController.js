@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
 const nodeSid = require('node-sid');
 const request = require('request');
+var $ = require('jQuery');
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -242,10 +243,17 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data;
-        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
+        $.getJSON("//ulogin.ru/token.php?host=https://adas-tusur.herokuapp.com/&token=" + token + "&callback=?",
+        function(data){
+            data=$.parseJSON(data.toString());
+            if(!data.error){
+                alert("Привет, "+data.first_name+" "+data.last_name+"!");
+            }
+        });
+        /*request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(body)
-                data = body;
+                data = ;
                 console.log(data)
                 console.log(data['uid']+' network = '+body['network'])
                 res.cookie('uid', body.uid);
@@ -268,7 +276,7 @@ exports.postApiAuth = async (req, res) => {
                       console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
                       res.redirect('/lk')
               }         
-              res.redirect('/')  */
-        });       
+              res.redirect('/') 
+        }); */     
     }
 }
