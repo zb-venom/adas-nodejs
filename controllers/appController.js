@@ -241,7 +241,7 @@ exports.postApiAuth = async (req, res) => {
     else {
         if (req.body.token)  {                    
             await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
-            .then(function (resp) {
+            .then(async function (resp) {
                 res.cookie('uid', req.data.uid); 
                 res.cookie('token', req.data.network); 
                 console.log(resp.data.uid);    
@@ -257,7 +257,7 @@ exports.postApiAuth = async (req, res) => {
 exports.postApiGetUid = async (req, res) => {
     if (req.params.token) {
         await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
-        .then(function (resp) {
+        .then(async function (resp) {
             console.log(resp.data.uid);           
             if (status.online)  {
                 axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
