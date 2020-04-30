@@ -241,10 +241,11 @@ exports.postApiAuth = async (req, res) => {
     }
     else {
         console.log(req.body.token);
-        var data = {};
-        await request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-            console.log(body.uid);
-            var user = await usersSchema.findOne({$or: [{vk_uid: body.uid}, {google_uid: body.uid}, {ya_uid: body.uid}]});
+        const data = await request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
+            console.log(body.uid);            
+        });
+        console.log(data);
+        var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
             if (user) {
                 res.clearCookie('_id');
                     res.clearCookie('sid');
@@ -263,6 +264,5 @@ exports.postApiAuth = async (req, res) => {
                     res.redirect('/lk')
             }         
             res.redirect('/')  
-        });
     }
 }
