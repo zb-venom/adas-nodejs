@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
 const nodeSid = require('node-sid');
 const request = require('request');
+const axios = require('axios')
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -242,13 +243,10 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data;
-        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body)
-                console.log(body.uid)
-                data = body;
-            }      
-        });
+        axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+            .then(function (res) {
+                console.log(res);
+            });
         var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
         if (user) {
             res.clearCookie('_id');
