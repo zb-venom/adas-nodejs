@@ -247,14 +247,13 @@ exports.postApiAuth = async (req, res) => {
         });
         console.log(data.uid);
         
-        const user = await usersSchema.findOne({$or: [{login: req.body.login.toLocaleLowerCase()}, {email: req.body.login}]})
+        const user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]})
         if (!user) {
             res.render('auth', {
                 title: 'Авторизация',
-                error: 'ОШИБКА! Данный логин не существует или введён неверно.'
+                error: 'ОШИБКА! Пользователь не найден. Попробуйте авторизироваться с полощью логина и пароля.'
             }) 
         } else {
-            if (hsh.getHash(req.body.password, user.salt) == user.password){    
                 res.clearCookie('_id');
                 res.clearCookie('sid');
                 res.cookie('_id', user._id);    
@@ -268,14 +267,9 @@ exports.postApiAuth = async (req, res) => {
                 res.cookie('sid', sid);
                 const new_sid = new sidSchema({ user_id: user._id, sid: sid });
                 await new_sid.save();
-                console.log('Пользователь (_id: '+user._id+') вошёл в систему. Sid: '+sid);          
+                console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
                 res.redirect('/lk')
-            } else {
-                res.render('auth', {
-                    title: 'Авторизация',
-                    error: 'ОШИБКА! Пароль введен неверно.'
-                }) 
-            }
+            } 
         }
     }
     
