@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
 const nodeSid = require('node-sid');
 const request = require('request');
-var $ = require('jQuery');
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
