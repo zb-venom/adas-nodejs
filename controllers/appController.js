@@ -237,7 +237,7 @@ exports.postSearch = async (req, res) => {
 
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
-    console.log(req.body.token);
+    res.cookie('token', req.body.token)
     await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
     .then(function (resp) {
         console.log(resp.data.uid);           
