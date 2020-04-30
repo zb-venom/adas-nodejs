@@ -235,10 +235,49 @@ exports.postSearch = async (req, res) => {
 
 
 exports.postApiAuth = async (req, res) => {
-    console.log(req.body.token);
-    var data = {};
-    request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-        data = body
-    });
+    var status = await check.check(req, res);
+    if (status.online)  {
+        
+    }
+    else {
+        console.log(req.body.token);
+        var data = {};
+        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
+            data = body
+        });
+        console.log(data.uid);
+        
+        const user = await usersSchema.findOne({$or: [{login: req.body.login.toLocaleLowerCase()}, {email: req.body.login}]})
+        if (!user) {
+            res.render('auth', {
+                title: 'Авторизация',
+                error: 'ОШИБКА! Данный логин не существует или введён неверно.'
+            }) 
+        } else {
+            if (hsh.getHash(req.body.password, user.salt) == user.password){    
+                res.clearCookie('_id');
+                res.clearCookie('sid');
+                res.cookie('_id', user._id);    
+                if (user.new_password) {   
+                    var hash = md5(md5(user.login) + md5(Date.now.toString())); 
+                    await usersSchema.findByIdAndUpdate(user._id, { 'new_password_hash': hash }); 
+                    res.redirect('/new_password/'+hash); 
+                    return 0; 
+                } 
+                const sid = nodeSid().create('SID', 32);
+                res.cookie('sid', sid);
+                const new_sid = new sidSchema({ user_id: user._id, sid: sid });
+                await new_sid.save();
+                console.log('Пользователь (_id: '+user._id+') вошёл в систему. Sid: '+sid);          
+                res.redirect('/lk')
+            } else {
+                res.render('auth', {
+                    title: 'Авторизация',
+                    error: 'ОШИБКА! Пароль введен неверно.'
+                }) 
+            }
+        }
+    }
+    
     res.redirect('/')
 }

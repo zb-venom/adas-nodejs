@@ -9,6 +9,9 @@ const userSchema = new Schema({
     about: String,
     new_password: Boolean,
     new_password_hash: String,
+    vk_uid: String,
+    google_uid: String,
+    ya_uid: String,
     type: {
         type: Number,
         default: 0
