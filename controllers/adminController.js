@@ -184,7 +184,7 @@ exports.addUser = async (req, res) => {
                 salt: 'salt'
             })
             await new_user.save();
-            console.log('Пользователь (_id: '+req.cookies._id+') добавил пользователя '+req.body.login+' (_id: '+req.body._id+').');
+            console.log('Пользователь (_id: '+req.cookies._id+') добавил пользователя '+req.body.login+'.');
             res.redirect('/users')
         }
     }
