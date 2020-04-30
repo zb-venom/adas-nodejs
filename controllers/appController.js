@@ -231,3 +231,8 @@ exports.postSearch = async (req, res) => {
     if (!status.online)  res.redirect('/');
     res.redirect('/search/'+req.body.search)
 }
+
+
+exports.postApiAuth = async (req, res) => {
+    console.log(req.body);
+}
