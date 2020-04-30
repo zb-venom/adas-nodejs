@@ -243,22 +243,15 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data;
-        $.getJSON("//ulogin.ru/token.php?host=https://adas-tusur.herokuapp.com/&token=" + token + "&callback=?",
-        function(data){
-            data=$.parseJSON(data.toString());
-            if(!data.error){
-                alert("Привет, "+data.first_name+" "+data.last_name+"!");
-            }
-        });
-        /*request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
+        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(body)
-                data = ;
+                data = body;
                 console.log(data)
                 console.log(data['uid']+' network = '+body['network'])
                 res.cookie('uid', body.uid);
               }            
-              /*var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
+              var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
               if (user) {
                   res.clearCookie('_id');
                       res.clearCookie('sid');
@@ -277,6 +270,6 @@ exports.postApiAuth = async (req, res) => {
                       res.redirect('/lk')
               }         
               res.redirect('/') 
-        }); */     
+        });  
     }
 }
