@@ -174,6 +174,8 @@ exports.getLk = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         if (!req.params.id) { res.redirect('/lk/'+req.cookies._id); return 0; }
+        var myLk = false;
+        if (req.cookies._id == req.params.id) { myLk = true; }
         const user = await usersSchema.findById(req.params.id).lean()
         const auditory = await auditorySchema.find({taken: user._id}).lean()
         const have = []
@@ -185,6 +187,7 @@ exports.getLk = async (req, res) => {
             title: 'Личный кабинет',
             status,
             user: user,
+            myLk,
             have
         })
     }
