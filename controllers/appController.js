@@ -237,36 +237,38 @@ exports.postSearch = async (req, res) => {
 
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
-    if (status.online)  {
-        
-    }
-    else {
-        console.log(req.body.token);
-        var data;
-        await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
-            .then(function (res) {
-                console.log(res);
-                data = res.data;
-                console.log(res.data.uid);
-            });
-        var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
-        if (user) {
-            res.clearCookie('_id');
-                res.clearCookie('sid');
-                res.cookie('_id', user._id);    
-                if (user.new_password) {   
-                    var hash = md5(md5(user.login) + md5(Date.now.toString())); 
-                    await usersSchema.findByIdAndUpdate(user._id, { 'new_password_hash': hash }); 
-                    res.redirect('/new_password/'+hash); 
-                    return 0; 
-                } 
-                const sid = nodeSid().create('SID', 32);
-                res.cookie('sid', sid);
-                const new_sid = new sidSchema({ user_id: user._id, sid: sid });
-                await new_sid.save();
-                console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
-                res.redirect('/lk')
-        }         
-        res.redirect('/') 
-    };  
+    console.log(req.body.token);
+    var data;
+    await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+    .then(function (res) {
+        console.log(res.data.uid);           
+        if (status.online)  {
+            axios.post('/api/get/uid');
+        }
+        else {
+            axios.post('/api/set/uid');
+        }
+    });   
+}
+
+exports.postaApiGetUid = async (req, res) => {
+    var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
+    if (user) {
+        res.clearCookie('_id');
+            res.clearCookie('sid');
+            res.cookie('_id', user._id);    
+            if (user.new_password) {   
+                var hash = md5(md5(user.login) + md5(Date.now.toString())); 
+                await usersSchema.findByIdAndUpdate(user._id, { 'new_password_hash': hash }); 
+                res.redirect('/new_password/'+hash); 
+                return 0; 
+            } 
+            const sid = nodeSid().create('SID', 32);
+            res.cookie('sid', sid);
+            const new_sid = new sidSchema({ user_id: user._id, sid: sid });
+            await new_sid.save();
+            console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
+            res.redirect('/lk')
+    }         
+    res.redirect('/') 
 }
