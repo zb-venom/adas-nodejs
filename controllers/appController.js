@@ -246,7 +246,7 @@ exports.postApiAuth = async (req, res) => {
             if (!error && response.statusCode == 200) {
                 console.log(body)
                 data = body;
-                console.log(data.uid+' network = '+body.network)
+                console.log(data['uid']+' network = '+body.network)
                 res.cookie('uid', body.uid);
               }            
               /*var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
