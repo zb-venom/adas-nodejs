@@ -246,8 +246,7 @@ exports.postApiAuth = async (req, res) => {
                 if (resp.data.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
                 console.log('Пользователь (_id: '+req.cookies._id+') успешно привязал '+resp.data.network);     
             });
-        }    
-        res.redirect('/')    
+        }     
     }
     else {
         if (req.body.token)  {                    
