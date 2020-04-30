@@ -3,6 +3,7 @@ const router = Router()
 const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
 const nodeSid = require('node-sid')
+var fs = require('fs');
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -234,7 +235,7 @@ exports.postSearch = async (req, res) => {
 
 
 exports.postApiAuth = async (req, res) => {
-    console.log(req);
-    console.log(req.body);
-    
+    console.log(req.body.token);
+    var html = fs.readFileSync('http://ulogin.ru/token.php?token={$req.body.token}&host=https://adas-tusur.herokuapp.com/');
+    console.log(html)
 }
