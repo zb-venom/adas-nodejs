@@ -271,6 +271,7 @@ exports.postApiAuth = async (req, res) => {
                         await new_sid.save();
                         console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+resp.data.network+'. Sid: '+sid);          
                         res.redirect('/lk')
+                        return;
                 }  
             });
             res.redirect('/auth');
