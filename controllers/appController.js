@@ -259,7 +259,7 @@ exports.postApiAuth = async (req, res) => {
                         res.cookie('sid', sid);
                         const new_sid = new sidSchema({ user_id: user._id, sid: sid });
                         await new_sid.save();
-                        console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
+                        console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+resp.data.network+'. Sid: '+sid);          
                         res.redirect('/lk')
                 }  
             });
