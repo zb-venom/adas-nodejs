@@ -244,7 +244,7 @@ exports.postApiAuth = async (req, res) => {
                 if (resp.data.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : resp.data.uid})
                 if (resp.data.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : resp.data.uid})     
                 if (resp.data.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
-                console.log('Пользователь (_id: '+user._id+') успешно привязал '+resp.data.network);     
+                console.log('Пользователь (_id: '+req.cookies._id+') успешно привязал '+resp.data.network);     
             });
         }    
         res.redirect('/')    
