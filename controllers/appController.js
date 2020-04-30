@@ -248,7 +248,7 @@ exports.postApiAuth = async (req, res) => {
         console.log(data);
         data.lean();
         console.log(data.uid);
-        if (data) const user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]})
+        if (data) var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]})
         if (!user) {
             res.render('auth', {
                 title: 'Авторизация',
