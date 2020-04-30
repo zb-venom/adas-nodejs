@@ -237,28 +237,41 @@ exports.postSearch = async (req, res) => {
 
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
-    res.cookie('token', req.body.token)
-    await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
-    .then(function (resp) {
-        console.log(resp.data.uid);           
-        if (status.online)  {
-            axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
-                uid: resp.data.uid,
-                network: resp.data.network
+    if (status.online)  res.redirect('/');
+    else {
+        if (req.body.token)  {                    
+            await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+            .then(function (resp) {
+                res.cookie('uid', req.data.uid); 
+                res.cookie('token', req.data.network); 
+                console.log(resp.data.uid);    
+                var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
+                console.log(user);
             });
-        }
-        else {
-            axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
-                uid: resp.data.uid,
-                network: resp.data.network
-            })
-        }
-    });  
-    res.redirect('/'); 
+            res.redirect('/');
+        } 
+    }
+    res.redirect('/');
 }
 
 exports.postApiGetUid = async (req, res) => {
     if (req.params.token) {
+        await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+        .then(function (resp) {
+            console.log(resp.data.uid);           
+            if (status.online)  {
+                axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
+                    uid: resp.data.uid,
+                    network: resp.data.network
+                });
+            }
+            else {
+                axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
+                    uid: resp.data.uid,
+                    network: resp.data.network
+                })
+            }
+        }); 
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.clearCookie('_id');
