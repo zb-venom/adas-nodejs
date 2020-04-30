@@ -17,6 +17,7 @@
     "express-handlebars": "^3.1.0",
     "jQuery": "^1.7.4",
     "js-md5": "^0.7.3",
+    "jsdom": "^16.2.2",
     "mongo-join-query": "^1.0.2",
     "mongoose": "^5.9.2",
     "node-sid": "^0.1.3",
