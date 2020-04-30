@@ -274,6 +274,7 @@ exports.postApiAuth = async (req, res) => {
                 }  
             });
             res.redirect('/auth');
+            return;
         } 
     }
     res.redirect('/auth');
