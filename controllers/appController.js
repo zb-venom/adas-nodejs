@@ -242,13 +242,13 @@ exports.postApiAuth = async (req, res) => {
     .then(function (resp) {
         console.log(resp.data.uid);           
         if (status.online)  {
-            axios.post('/api/set/'+req.body.token, {
+            axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
             });
         }
         else {
-            axios.post('/api/get/'+req.body.token, {
+            axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
             })
