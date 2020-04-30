@@ -244,6 +244,7 @@ exports.postApiAuth = async (req, res) => {
         var data;
         request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
             if (!error && response.statusCode == 200) {
+                console.log(body)
                 console.log(body.uid+' network = '+body.network)
                 res.cookie('uid', body.uid);
               }            
