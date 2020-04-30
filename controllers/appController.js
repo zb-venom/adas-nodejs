@@ -2,8 +2,8 @@ const {Router} = require('express')
 const router = Router()
 const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
-const nodeSid = require('node-sid')
-var fs = require('fs');
+const nodeSid = require('node-sid');
+const request = require('request');
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -237,6 +237,6 @@ exports.postSearch = async (req, res) => {
 exports.postApiAuth = async (req, res) => {
     console.log(req.body.token);
     request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-        console.log('body: ', body); // Print the HTML for the Google homepage.
+        console.log('body: ', body);
     });
 }
