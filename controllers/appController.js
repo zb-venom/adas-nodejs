@@ -243,13 +243,12 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data;
-        axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+        await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
             .then(function (res) {
                 console.log(res);
                 data = res.data;
                 console.log(res.data.uid);
             });
-        console.log(data);
         var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
         if (user) {
             res.clearCookie('_id');
