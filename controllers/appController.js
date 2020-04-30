@@ -242,21 +242,15 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data = {};
-        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-            data = body;
+        await request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {            
             console.log(body);
+            data = body;
         });
         console.log(data);
-        data.lean();
         console.log(data.uid);
         if (data) var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]})
-        if (!user) {
-            res.render('auth', {
-                title: 'Авторизация',
-                error: 'ОШИБКА! Пользователь не найден. Попробуйте авторизироваться с полощью логина и пароля.'
-            }) 
-        } else {
-                res.clearCookie('_id');
+        if (user) {
+            res.clearCookie('_id');
                 res.clearCookie('sid');
                 res.cookie('_id', user._id);    
                 if (user.new_password) {   
@@ -271,7 +265,7 @@ exports.postApiAuth = async (req, res) => {
                 await new_sid.save();
                 console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
                 res.redirect('/lk')
-            } 
-        }    
+        }   
         res.redirect('/')
     }
+}
