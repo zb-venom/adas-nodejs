@@ -234,5 +234,7 @@ exports.postSearch = async (req, res) => {
 
 
 exports.postApiAuth = async (req, res) => {
+    console.log(req);
     console.log(req.body);
+    
 }
