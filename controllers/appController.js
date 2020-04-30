@@ -259,7 +259,7 @@ exports.postApiAuth = async (req, res) => {
 }
 
 exports.postApiGetUid = async (req, res) => {
-    if (req.params.token == req.cookies.token) {
+    if (req.params.token) {
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.clearCookie('_id');
