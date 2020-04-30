@@ -184,7 +184,7 @@ exports.addUser = async (req, res) => {
                 salt: 'salt'
             })
             await new_user.save();
-            console.log(Date() + ': Пользователь (_id: '+req.cookies._id+') добавил пользователя '+req.body.login+' (_id: '+req.body._id+').');
+            console.log('Пользователь (_id: '+req.cookies._id+') добавил пользователя '+req.body.login+' (_id: '+req.body._id+').');
             res.redirect('/users')
         }
     }
@@ -206,7 +206,7 @@ exports.editUser = async (req, res) => {
             phone: req.body.phone,
             code: req.body.code
         })
-        console.log(Date() + ': Пользователь (_id: '+req.cookies._id+') изменил пользователя '+req.body.login+' (_id: '+req.body._id+').');
+        console.log('Пользователь (_id: '+req.cookies._id+') изменил пользователя '+req.body.login+' (_id: '+req.body._id+').');
         res.redirect('/users')
     }
     else res.redirect('/users')   
@@ -217,7 +217,7 @@ exports.deleteUser = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }  
-    console.log(Date() + ': Пользователь (_id: '+req.cookies._id+') удалил пользователя (_id: '+req.body._id+').');
+    console.log('Пользователь (_id: '+req.cookies._id+') удалил пользователя (_id: '+req.body._id+').');
     const user = await usersSchema.findByIdAndDelete(req.body._id)
     res.redirect('/users')
 }

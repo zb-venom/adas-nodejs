@@ -61,7 +61,7 @@ exports.postAuth = async (req, res) => {
                 res.cookie('sid', sid);
                 const new_sid = new sidSchema({ user_id: user._id, sid: sid });
                 await new_sid.save();
-                console.log(Date() + ': Пользователь (_id: '+user._id+') вошёл в систему. Sid: '+sid);          
+                console.log('Пользователь (_id: '+user._id+') вошёл в систему. Sid: '+sid);          
                 res.redirect('/lk')
             } else {
                 res.render('auth', {
@@ -149,7 +149,7 @@ exports.postNewPassword = async (req, res) => {
         } else {   
             const salt = hsh.getSalt('', 8);
             await usersSchema.findByIdAndUpdate(req.cookies._id, {'password': hsh.getHash(req.body.password, salt), 'salt': salt, 'new_password': false, 'new_password_hash': ''})
-            console.log(Date() + ': Пользователь (_id: '+req.cookies._id+') удачно сменил пароль.');
+            console.log('Пользователь (_id: '+req.cookies._id+') удачно сменил пароль.');
             res.clearCookie('_id');
             res.redirect('/auth')
         }
@@ -161,7 +161,7 @@ exports.getLogout = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) res.redirect('/')
     else  {       
-        console.log(Date() + ': Пользователь (_id: '+req.cookies._id+') вышел из системы. Sid: '+req.cookies.sid);
+        console.log('Пользователь (_id: '+req.cookies._id+') вышел из системы. Sid: '+req.cookies.sid);
         res.clearCookie('_id');
         await sidSchema.findOneAndUpdate({ sid: req.cookies.sid }, { online: false, close: Date() });
         res.clearCookie('sid');
