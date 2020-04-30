@@ -270,8 +270,6 @@ exports.postApiAuth = async (req, res) => {
                 console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
                 res.redirect('/lk')
             } 
-        }
+        }    
+        res.redirect('/')
     }
-    
-    res.redirect('/')
-}
