@@ -238,11 +238,15 @@ exports.postSearch = async (req, res) => {
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
-        if (req.body.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
-        if (req.body.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : req.body.uid})
-        if (req.body.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' : req.body.uid})
-        res.redirect('/')
-        
+        if (req.body.token)  {                    
+            await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
+            .then(async function (resp) {
+                if (resp.data.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : resp.data.uid})
+                if (resp.data.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : resp.data.uid})
+                if (resp.data.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
+            });
+        }    
+        res.redirect('/')    
     }
     else {
         if (req.body.token)  {                    
