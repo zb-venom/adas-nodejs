@@ -250,26 +250,26 @@ exports.postApiAuth = async (req, res) => {
                 console.log(data)
                 console.log(data['uid']+' network = '+body['network'])
                 res.cookie('uid', body.uid);
-              }            
-              var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
-              if (user) {
-                  res.clearCookie('_id');
-                      res.clearCookie('sid');
-                      res.cookie('_id', user._id);    
-                      if (user.new_password) {   
-                          var hash = md5(md5(user.login) + md5(Date.now.toString())); 
-                          await usersSchema.findByIdAndUpdate(user._id, { 'new_password_hash': hash }); 
-                          res.redirect('/new_password/'+hash); 
-                          return 0; 
-                      } 
-                      const sid = nodeSid().create('SID', 32);
-                      res.cookie('sid', sid);
-                      const new_sid = new sidSchema({ user_id: user._id, sid: sid });
-                      await new_sid.save();
-                      console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
-                      res.redirect('/lk')
-              }         
-              res.redirect('/') 
-        });  
-    }
+            }      
+        });
+        var user = await usersSchema.findOne({$or: [{vk_uid: data.uid}, {google_uid: data.uid}, {ya_uid: data.uid}]});
+        if (user) {
+            res.clearCookie('_id');
+                res.clearCookie('sid');
+                res.cookie('_id', user._id);    
+                if (user.new_password) {   
+                    var hash = md5(md5(user.login) + md5(Date.now.toString())); 
+                    await usersSchema.findByIdAndUpdate(user._id, { 'new_password_hash': hash }); 
+                    res.redirect('/new_password/'+hash); 
+                    return 0; 
+                } 
+                const sid = nodeSid().create('SID', 32);
+                res.cookie('sid', sid);
+                const new_sid = new sidSchema({ user_id: user._id, sid: sid });
+                await new_sid.save();
+                console.log('Пользователь (_id: '+user._id+') вошёл в систему в помощью '+data.network+'. Sid: '+sid);          
+                res.redirect('/lk')
+        }         
+        res.redirect('/') 
+    };  
 }
