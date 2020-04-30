@@ -285,6 +285,7 @@ exports.postApiGetUid = async (req, res) => {
 
 exports.postApiSetUid = async (req, res) => {
     if (req.params.token == req.cookies.token) {
+        console.log(req.body.uid + '       ' + req.body.network)
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.redirect('/')
