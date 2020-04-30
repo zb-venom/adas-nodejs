@@ -242,7 +242,7 @@ exports.postApiAuth = async (req, res) => {
     else {
         console.log(req.body.token);
         var data = {};
-        request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
+        await request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
             console.log(body.uid);
             var user = await usersSchema.findOne({$or: [{vk_uid: body.uid}, {google_uid: body.uid}, {ya_uid: body.uid}]});
             if (user) {
