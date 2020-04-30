@@ -6,6 +6,7 @@ const appRoutes = require('./routes/app')
 const cookieParser = require('cookie-parser')
 const colors = require('colors');
 const config = require('./config/default')
+const bodyParser = require('body-parser')
 
 const PORT = process.env.PORT || 3000
 
@@ -15,6 +16,13 @@ const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs'
 })
+
+app.use(
+    bodyParser.urlencoded({
+      extended: true
+    })
+  )
+app.use(bodyParser.json())
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
