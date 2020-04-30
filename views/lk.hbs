@@ -47,7 +47,7 @@
                 <div id="vk_auth"></div>
                 <script type="text/javascript">
                 VK.init({apiId: 7441126});
-                VK.Widgets.Auth("vk_auth", {"onAuth":function(data) {alert('user '+data['uid']+' authorized');}});
+                VK.Widgets.Auth("vk_auth", {"onAuth":function(data) {console.log(data)}});
                 </script>
             </div>
         </div>
