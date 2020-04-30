@@ -15,7 +15,6 @@ router.route('/new_password/:hash').get(appController.getNewPassword).post(appCo
 router.route('/logout').get(appController.getLogout);
 
 router.route('/api/auth').post(appController.postApiAuth);
-router.route('/api/set/:token').post(appController.postApiSetUid);
 
 router.route('/lk').get(appController.getLk);
 router.route('/lk/:id').get(appController.getLk);
