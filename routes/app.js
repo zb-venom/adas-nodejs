@@ -14,7 +14,7 @@ router.route('/reg').get(appController.getReg).post(appController.postReg);
 router.route('/new_password/:hash').get(appController.getNewPassword).post(appController.postNewPassword);
 router.route('/logout').get(appController.getLogout);
 
-router.route('/api/auth').post(appController.postApiAuth);
+//router.route('/api/auth').post(appController.postApiAuth);
 
 router.route('/lk').get(appController.getLk);
 router.route('/lk/:id').get(appController.getLk);
@@ -34,8 +34,6 @@ router.route('/users/:search').get(adminController.getUsers).post(adminControlle
 router.route('/user/add').post(adminController.addUser);
 router.route('/user/edit').post(adminController.editUser);
 router.route('/user/delete').post(adminController.deleteUser);
-
-
 
 router.get('/*', (req, res) => {
     res.render('404',{
