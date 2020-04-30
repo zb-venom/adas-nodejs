@@ -258,7 +258,7 @@ exports.postApiAuth = async (req, res) => {
     });   
 }
 
-exports.postaApiGetUid = async (req, res) => {
+exports.postApiGetUid = async (req, res) => {
     if (req.params.token == req.cookies.token) {
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
@@ -283,7 +283,7 @@ exports.postaApiGetUid = async (req, res) => {
 }
 
 
-exports.postaApiSetUid = async (req, res) => {
+exports.postApiSetUid = async (req, res) => {
     if (req.params.token == req.cookies.token) {
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
