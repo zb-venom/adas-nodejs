@@ -238,6 +238,10 @@ exports.postSearch = async (req, res) => {
 exports.postApiAuth = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
+        if (req.body.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
+        if (req.body.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : req.body.uid})
+        if (req.body.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' : req.body.uid})
+        res.redirect('/')
         
     }
     else {
@@ -263,34 +267,10 @@ exports.postApiAuth = async (req, res) => {
                         res.redirect('/lk')
                 }  
             });
-            res.redirect('/');
+            res.redirect('/auth');
         } 
     }
-    res.redirect('/');
-}
-
-exports.postApiGetUid = async (req, res) => {
-    if (req.params.token) {
-        await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
-        .then(async function (resp) {
-            console.log(resp.data.uid);           
-            if (status.online)  {
-                axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
-                    uid: resp.data.uid,
-                    network: resp.data.network
-                });
-            }
-            else {
-                axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
-                    uid: resp.data.uid,
-                    network: resp.data.network
-                })
-            }
-        }); 
-        var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
-               
-    }
-    res.redirect('/') 
+    res.redirect('/auth');
 }
 
 
