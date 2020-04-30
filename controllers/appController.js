@@ -236,7 +236,9 @@ exports.postSearch = async (req, res) => {
 
 exports.postApiAuth = async (req, res) => {
     console.log(req.body.token);
+    var data = {};
     request('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/', function (error, response, body) {
-        console.log('body: ', body);
+        data = body
     });
+    res.redirect('/')
 }
