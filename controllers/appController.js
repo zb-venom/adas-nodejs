@@ -244,13 +244,13 @@ exports.postApiAuth = async (req, res) => {
     .then(function (resp) {
         console.log(resp.data.uid);           
         if (status.online)  {
-            axios.post('/api/get/'+req.body.token, {
+            axios.post('https://adas-tusur.herokuapp.com/api/set/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
             });
         }
         else {
-            axios.post('/api/set/'+req.body.token, {
+            axios.post('https://adas-tusur.herokuapp.com/api/get/'+req.body.token, {
                 uid: resp.data.uid,
                 network: resp.data.network
             });
@@ -283,15 +283,15 @@ exports.postApiGetUid = async (req, res) => {
 }
 
 
-exports.postApiSetUid = async (req, res) => {
+exports.posApiSetUid = async (req, res) => {
     if (req.params.token == req.cookies.token) {
         var user = await usersSchema.findOne({$or: [{vk_uid: req.body.uid}, {google_uid: req.body.uid}, {ya_uid: req.body.uid}]});
         if (user) {
             res.redirect('/')
         } else {
             if (req.body.network == 'vk') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
-            if (req.body.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
-            if (req.body.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : req.body.uid})
+            if (req.body.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : req.body.uid})
+            if (req.body.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' : req.body.uid})
         }
     }         
     res.redirect('/') 
