@@ -10,6 +10,7 @@ const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
 const usersSchema = require('../models/users');
 const sidSchema = require('../models/sid');
+const logsSchema = require('../models/logs');
 
 var check = require('../scripts/check');
 var hsh = require('../scripts/hash');
@@ -206,7 +207,6 @@ exports.getLk = async (req, res) => {
     }
 }
 
-
 exports.getSearch = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/')
@@ -259,6 +259,20 @@ exports.postSearch = async (req, res) => {
     else if (req.body.type)
         res.redirect('/search/type/'+req.body.type);
     else res.redirect('/search/')
+}
+
+exports.getLogs = async (req, res) => {
+    var status = await check.check(req, res);
+    if (!status.online)  res.redirect('/')
+    else {
+        var logs = await logsSchema.find({}).lean()         
+        res.render('logs', {
+            title: 'Журнал',
+            Logs: true,
+            status,
+            logs
+        })
+    }
 }
 
 

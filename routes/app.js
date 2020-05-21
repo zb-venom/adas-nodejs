@@ -27,6 +27,8 @@ router.route('/search/:search').get(appController.getSearch).post(appController.
 router.route('/search/type/:type').get(appController.getSearch).post(appController.postSearch);
 router.route('/search/:search/type/:type').get(appController.getSearch).post(appController.postSearch);
 
+router.route('/logs').get(appController.getLogs)
+
 router.route('/edit').get(adminController.getEdit).post(adminController.postEdit);
 router.route('/edit/:search').get(adminController.getEdit).post(adminController.postEdit);
 
