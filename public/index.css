@@ -26,6 +26,11 @@
     color: red;
 }
 
+.logs {
+    margin: 1.25rem;
+    color: white;
+}
+
 .index {
     background: rgb(14, 14, 24);
     max-width: 100vw;
