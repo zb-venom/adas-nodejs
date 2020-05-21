@@ -185,6 +185,8 @@ exports.getLk = async (req, res) => {
             var device = await devicesSchema.findOne({_id: auditory[i].device_id}).lean()
             have[i] = Object.assign({name: device.name}, auditory[i])
         }
+        uidAddRender = true;
+        uidDelRender = true;
         if (user.vk_uid && user.google_uid && user.ya_uid)
             uidAddRender = false;
         if (!user.vk_uid && !user.google_uid && !user.ya_uid)
