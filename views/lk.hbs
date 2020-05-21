@@ -56,13 +56,13 @@
                     <h2>Уже привязанны:</h2>
                     <hr>
                     {{#if user.vk_uid}}
-                    <a href="/api/delete/{{user.vk_uid}}">VK (отвязать)</a>
+                    <a href="/api/delete/vk/{{user.vk_uid}}">VK (отвязать)</a>
                     {{/if}}
                     {{#if user.ya_uid}}
-                    <a href="/api/delete/{{user.ya_uid}}">YA (отвязать)</a>
+                    <a href="/api/delete/ya/{{user.ya_uid}}">YA (отвязать)</a>
                     {{/if}}
                     {{#if user.google_uid}}
-                    <a href="/api/delete/{{user.google_uid}}">GOOGLE (отвязать)</a>
+                    <a href="/api/delete/google/{{user.google_uid}}">GOOGLE (отвязать)</a>
                     {{/if}}
                 {{/if}}   
             </div>

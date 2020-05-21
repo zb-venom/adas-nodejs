@@ -287,10 +287,13 @@ exports.postApiAuth = async (req, res) => {
     }
 }
 
-exports.postDelApiAuth = async (req, res) => {
+exports.deleteVk = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
-        if (req.params.uid) 
+        var user = await usersSchema.findOne({vk_uid: resp.data.uid});
+        console.log(user._id)
+        /*if (user._id == req.cookies._id) 
+            await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : ''})*/
         res.redirect('/lk');
         return;
     }
