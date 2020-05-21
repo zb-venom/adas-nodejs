@@ -188,6 +188,7 @@ exports.getLk = async (req, res) => {
         uidAddRender = true;
         uidDelRender = true;
         error = req.cookies.error ? req.cookies.error : NaN;
+        res.clearCookie('error');
         if (user.vk_uid && user.google_uid && user.ya_uid)
             uidAddRender = false;
         if (!user.vk_uid && !user.google_uid && !user.ya_uid)
