@@ -211,6 +211,7 @@ exports.getSearch = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/')
     else {
+        console.log(req.query.type)
         if (!req.params.search) var device = await devicesSchema.find({}).lean(); 
         else var device = await devicesSchema.find({ 
             $or: [ 
