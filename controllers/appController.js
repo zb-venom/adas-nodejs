@@ -248,7 +248,7 @@ exports.postSearch = async (req, res) => {
     else if (req.body.search)
         res.redirect('/search/'+req.body.search);
     else if (req.body.type)
-        res.redirect('/type/'+req.body.type);
+        res.redirect('/search/type/'+req.body.type);
 }
 
 
