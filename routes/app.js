@@ -16,6 +16,8 @@ router.route('/logout').get(appController.getLogout);
 
 router.route('/api/auth').post(appController.postApiAuth);
 router.route('/api/delete/vk/:uid').get(appController.deleteVk);
+router.route('/api/delete/ya/:uid').get(appController.deleteYa);
+router.route('/api/delete/google/:uid').get(appController.deleteGoogle);
 
 router.route('/lk').get(appController.getLk);
 router.route('/lk/:id').get(appController.getLk);
