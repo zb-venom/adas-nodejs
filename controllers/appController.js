@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser');
 const md5 = require('js-md5');
 const nodeSid = require('node-sid');
 const request = require('request');
-const axios = require('axios')
+const axios = require('axios');
+var moment = require('moment');
+moment.lang('ru');
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -266,9 +268,8 @@ exports.getLogs = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         var logs = await logsSchema.find({}).lean() 
-        console.log(logs[0].device_id)  
-        console.log(logs[1].device_id)  
-            
+        console.log(logs.length)
+        console.log(moment().format(logs[0].received))
         res.render('logs', {
             title: 'Журнал',
             Logs: true,
