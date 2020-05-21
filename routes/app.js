@@ -23,6 +23,8 @@ router.route('/lk').get(appController.getLk);
 router.route('/lk/:id').get(appController.getLk);
 
 router.route('/search').get(appController.getSearch).post(appController.postSearch);
+router.route('/search/:search').get(appController.getSearch).post(appController.postSearch);
+router.route('/search/:search/type/:type').get(appController.getSearch).post(appController.postSearch);
 
 router.route('/edit').get(adminController.getEdit).post(adminController.postEdit);
 router.route('/edit/:search').get(adminController.getEdit).post(adminController.postEdit);
