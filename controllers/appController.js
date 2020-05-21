@@ -270,6 +270,11 @@ exports.getLogs = async (req, res) => {
         var logs = await logsSchema.find({}).lean() 
         console.log(logs.length)
         console.log(moment(logs[0].received, 'MMMM D, YYYY' ))
+        for (var i; i < logs.length; i++){
+            logs[i].received = moment(logs[0].received, 'MMMM D, YYYY' );
+            logs[i].returned = moment(logs[0].returned, 'MMMM D, YYYY' );
+
+        }
         res.render('logs', {
             title: 'Журнал',
             Logs: true,
