@@ -267,8 +267,8 @@ exports.getLogs = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         var logs = await logsSchema.find({}).lean() 
-        for (var i; i < logs.length; i++){
-            console.log('f')
+        for (var i = 0; i < logs.length; i++){
+            moment.lang('ru');
             console.log(logs[i].user_id)
             user = await usersSchema.findById(logs[i].user_id).lean();
             console.log(user.about)
