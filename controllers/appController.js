@@ -270,6 +270,7 @@ exports.getLogs = async (req, res) => {
         var logs = await logsSchema.find({}).lean() 
         for (var i; i < logs.length; i++){
             user = await usersSchema.findById(logs[i].user_id);
+            console.log(user.about)
             logs[i].user = user.about;
             received = moment(logs[0].received, 'MMMM D, YYYY' )
             returned = moment(logs[0].returned, 'MMMM D, YYYY' )
