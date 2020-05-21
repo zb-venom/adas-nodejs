@@ -265,7 +265,10 @@ exports.getLogs = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/')
     else {
-        var logs = await logsSchema.find({}).lean()         
+        var logs = await logsSchema.find({}).lean() 
+        console.log(logs[0].device_id)  
+        console.log(logs[1].device_id)  
+            
         res.render('logs', {
             title: 'Журнал',
             Logs: true,
