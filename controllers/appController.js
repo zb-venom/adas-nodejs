@@ -284,3 +284,6 @@ exports.postApiAuth = async (req, res) => {
         } 
     }
 }
+
+exports.postDelApiAuth = async (req, res) => {
+}
