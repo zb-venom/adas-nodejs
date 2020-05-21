@@ -276,6 +276,7 @@ exports.getLogs = async (req, res) => {
             console.log(received.format('YYYY-M-D'))
             logs[i].received = received.format('YYYY-M-D');
             logs[i].returned = returned.format('YYYY-M-D');
+        }
         res.render('logs', {
             title: 'Журнал',
             Logs: true,
