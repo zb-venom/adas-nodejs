@@ -270,11 +270,12 @@ exports.getLogs = async (req, res) => {
     else {
         var logs = await logsSchema.find({}).lean() 
         for (var i = 0; i < logs.length; i++){
-            console.log(logs[i].user_id)
             user = await usersSchema.findById(logs[i].user_id).lean();
             logs[i].user = user.about;
-            logs[i].received = moment(logs[0].received).format('YYYY-M-D');
-            logs[i].returned = moment(logs[0].returned).format('YYYY-M-D');
+            device = await devicesSchema.findById(logs[i].device_id).lean();
+            logs[i].device = device.name;
+            logs[i].received = moment(logs[0].received).format('DD MMMMM YYYY');
+            logs[i].returned = moment(logs[0].returned).format('DD MMMMM YYYY');
         }
         res.render('logs', {
             title: 'Журнал',
