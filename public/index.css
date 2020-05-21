@@ -16,8 +16,9 @@
     color: white;
 }
 
-.a-network {
-    margin-top: -.5rem;
+.a-network {   
+    vertical-align: text-top;
+    font-size: 0.7rem;
     color: tomato;
 }
 
