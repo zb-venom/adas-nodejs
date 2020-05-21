@@ -185,10 +185,6 @@ exports.getLk = async (req, res) => {
             var device = await devicesSchema.findOne({_id: auditory[i].device_id}).lean()
             have[i] = Object.assign({name: device.name}, auditory[i])
         }
-        console.log(user)
-        console.log(user.vk_uid)
-        console.log(user.google_uid)
-        console.log(user.ya_uid)
         res.render('lk', {
             title: 'Личный кабинет',
             status,
