@@ -243,7 +243,12 @@ exports.getSearch = async (req, res) => {
 exports.postSearch = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/');
-    res.redirect('/search/'+req.body.search)
+    if (req.body.search && req.body.type)
+        res.redirect('/search/'+req.body.search+'/type/'+req.body.type);
+    else if (req.body.search)
+        res.redirect('/search/'+req.body.search);
+    else if (req.body.type)
+        res.redirect('/type/'+req.body.type);
 }
 
 
