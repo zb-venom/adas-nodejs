@@ -7,7 +7,7 @@ const request = require('request');
 const axios = require('axios');
 var moment = require('moment');
 
-moment.lang('ru');
+moment.locale('ru'); 
 
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
@@ -274,8 +274,8 @@ exports.getLogs = async (req, res) => {
             logs[i].user = user.about;
             device = await devicesSchema.findById(logs[i].device_id).lean();
             logs[i].device = device.name;
-            logs[i].received = moment(logs[0].received).format('DD MMMMM YYYY');
-            logs[i].returned = moment(logs[0].returned).format('DD MMMMM YYYY');
+            logs[i].received = moment(logs[0].received).format('lll');
+            logs[i].returned = moment(logs[0].returned).format('lll');
         }
         res.render('logs', {
             title: 'Журнал',
