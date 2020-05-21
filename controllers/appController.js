@@ -7,6 +7,8 @@ const request = require('request');
 const axios = require('axios');
 var moment = require('moment');
 
+moment.lang('ru');
+
 const devicesSchema = require('../models/devices');
 const auditorySchema = require('../models/auditory');
 const usersSchema = require('../models/users');
@@ -268,16 +270,11 @@ exports.getLogs = async (req, res) => {
     else {
         var logs = await logsSchema.find({}).lean() 
         for (var i = 0; i < logs.length; i++){
-            moment.lang('ru');
             console.log(logs[i].user_id)
             user = await usersSchema.findById(logs[i].user_id).lean();
-            console.log(user.about)
             logs[i].user = user.about;
-            var received = moment(logs[0].received)
-            var returned = moment(logs[0].returned)
-            console.log(received.format('YYYY-M-D'))
-            logs[i].received = received.format('YYYY-M-D');
-            logs[i].returned = returned.format('YYYY-M-D');
+            logs[i].received = moment(logs[0].received).format('YYYY-M-D');
+            logs[i].returned = moment(logs[0].returned).format('YYYY-M-D');
         }
         res.render('logs', {
             title: 'Журнал',
