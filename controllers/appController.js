@@ -268,12 +268,11 @@ exports.getLogs = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         var logs = await logsSchema.find({}).lean() 
-        console.log(logs.length)
-        console.log(moment(logs[0].received, 'MMMM D, YYYY' ))
         for (var i; i < logs.length; i++){
+            user = await usersSchema.findById(logs[i].user_id);
+            logs[i].user = user.about;
             logs[i].received = moment(logs[0].received, 'MMMM D, YYYY' );
             logs[i].returned = moment(logs[0].returned, 'MMMM D, YYYY' );
-
         }
         res.render('logs', {
             title: 'Журнал',
