@@ -290,7 +290,7 @@ exports.postApiAuth = async (req, res) => {
 exports.deleteVk = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
-        var user = await usersSchema.findOne({vk_uid: resp.data.uid});
+        var user = await usersSchema.findOne({vk_uid: req.params.uid});
         console.log(user._id)
         /*if (user._id == req.cookies._id) 
             await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : ''})*/
