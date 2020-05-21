@@ -288,4 +288,11 @@ exports.postApiAuth = async (req, res) => {
 }
 
 exports.postDelApiAuth = async (req, res) => {
+    var status = await check.check(req, res);
+    if (status.online)  {
+        if (req.params.uid) 
+        res.redirect('/lk');
+        return;
+    }
+    res.redirect('/');
 }
