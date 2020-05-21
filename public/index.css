@@ -27,6 +27,10 @@
 }
 
 .logs {
+    display: inline;
+}
+
+.p-logs {
     margin: 1.25rem;
     color: white;
 }
