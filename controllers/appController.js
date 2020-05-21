@@ -212,13 +212,7 @@ exports.getSearch = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         if (!req.params.search && !req.params.type) var device = await devicesSchema.find({}).lean(); 
-        else if (req.params.search) var device = await devicesSchema.find({ 
-                $or: [ 
-                    { about: { $regex: req.params.search, $options: '-i' } }, 
-                    { name: { $regex: req.params.search, $options: '-i'  } }
-                ]
-        }).lean() 
-        else if (req.params.type) var device = await devicesSchema.find({ 
+        else if (req.params.search && req.params.type) var device = await devicesSchema.find({ 
             $and: [ {
                 $or: [ 
                     { about: { $regex: req.params.search, $options: '-i' } }, 
@@ -227,6 +221,13 @@ exports.getSearch = async (req, res) => {
                 {  type : { $regex: req.params.type, $options: '-i' } }
             ]
         }).lean() 
+        else if (req.params.search) var device = await devicesSchema.find({ 
+                $or: [ 
+                    { about: { $regex: req.params.search, $options: '-i' } }, 
+                    { name: { $regex: req.params.search, $options: '-i'  } }
+                ]
+        }).lean() 
+        else if (req.params.type) var device = await devicesSchema.find({ type : { $regex: req.params.type, $options: '-i' } }).lean() 
         const have = []
         for (i = 0; device.length > i; i++) {
             var count_404 = await auditorySchema.find({device_id: device[i]._id, auditory: '404'}).countDocuments()
