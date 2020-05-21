@@ -211,8 +211,14 @@ exports.getSearch = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/')
     else {
-        if (!req.params.search) var device = await devicesSchema.find({}).lean(); 
-        else var device = await devicesSchema.find({ 
+        if (!req.params.search && !req.params.type) var device = await devicesSchema.find({}).lean(); 
+        else if (req.params.search) var device = await devicesSchema.find({ 
+                $or: [ 
+                    { about: { $regex: req.params.search, $options: '-i' } }, 
+                    { name: { $regex: req.params.search, $options: '-i'  } }
+                ]
+        }).lean() 
+        else if (req.params.type) var device = await devicesSchema.find({ 
             $and: [ {
                 $or: [ 
                     { about: { $regex: req.params.search, $options: '-i' } }, 
