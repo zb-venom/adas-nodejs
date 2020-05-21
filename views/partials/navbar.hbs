@@ -15,6 +15,15 @@
             <a class="nav-link" href="/search">Поиск оборудования</a>
           </li>
         {{/if}}
+        {{#if Logs}}
+          <li class="nav-item active">
+            <a class="nav-link" href="/logs">Журнал</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/logs">Журнал</a>
+          </li>
+        {{/if}}
         {{#if status.admin}}
           {{#if Edit}}
             <li class="nav-item active">
