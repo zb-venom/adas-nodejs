@@ -265,19 +265,6 @@ exports.getLogs = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online)  res.redirect('/')
     else {
-        const new_user = new logsSchema({
-            user_id: '5e5b6c300cce370994b118fe',
-            device_id: '5e60cc9066782b43d4758667',
-            returned: new Date()
-        })
-        await new_user.save();
-        
-        const new_user2 = new logsSchema({
-            user_id: '5e5b6c300cce370994b118fe',
-            device_id: '5e60ec881c9d440000f810ef',
-            returned: new Date()
-        })
-        await new_user2.save();
         var logs = await logsSchema.find({}).lean()         
         res.render('logs', {
             title: 'Журнал',
