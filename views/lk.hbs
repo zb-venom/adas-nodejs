@@ -46,7 +46,7 @@
                     <h2>Привязать акаунт</h2>
                     <hr>
                     <div id="uLogin" data-ulogin="display=panel;
-                    theme=flat;fields=first_name,last_name;providers={{#if user.vk_uid}}{{else}}vkontakte{{/if}}{{#if user.ya_uid}}{{else}}{{#if user.vk_uid}},{{/if}}yandex{{/if}}{{#if user.google_uid}}{{else}}{{#if user.ya_uid}},{{else}}{{#if user.vk_uid}},{{/if}}{{/if}}google{{/if}};
+                    theme=flat;fields=first_name,last_name;providers={{#if user.vk_uid}}{{else}}vkontakte{{/if}}{{#if user.ya_uid}}{{else}}{{#if user.vk_uid}}{{else}},{{/if}}yandex{{/if}}{{#if user.google_uid}}{{else}}{{#if user.ya_uid}}{{#if user.vk_uid}}{{else}},{{/if}}{{else}},{{/if}}google{{/if}};
                     hidden=;redirect_uri=https%3A%2F%2Fadas-tusur.herokuapp.com%2Fapi%2Fauth;mobilebuttons=0;"></div>
                     {{#if uidDelRender}}
                     <hr>
