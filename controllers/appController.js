@@ -291,8 +291,10 @@ exports.deleteVk = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
         var user = await usersSchema.findOne({vk_uid: req.params.uid});
-        if (user._id == req.cookies._id) 
+        if (user._id == req.cookies._id)  {
             await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : ''})
+            console.log('Пользователь (_id: '+user._id+') отвязал VK');     
+        }
         res.redirect('/lk');
         return;
     }
@@ -303,8 +305,10 @@ exports.deleteYa = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
         var user = await usersSchema.findOne({ya_uid: req.params.uid});
-        if (user._id == req.cookies._id) 
+        if (user._id == req.cookies._id)  {
             await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' : ''})
+            console.log('Пользователь (_id: '+user._id+') отвязал Yandex');     
+        }
         res.redirect('/lk');
         return;
     }
@@ -315,8 +319,10 @@ exports.deleteGoogle = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  {
         var user = await usersSchema.findOne({google_uid: req.params.uid});
-        if (user._id == req.cookies._id) 
+        if (user._id == req.cookies._id) {
             await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : ''})
+            console.log('Пользователь (_id: '+user._id+') отвязал Google');     
+        }
         res.redirect('/lk');
         return;
     }
