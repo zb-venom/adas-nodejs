@@ -187,6 +187,7 @@ exports.getLk = async (req, res) => {
         }
         uidAddRender = true;
         uidDelRender = true;
+        error = req.cookies.error ? req.cookies.error : NaN;
         if (user.vk_uid && user.google_uid && user.ya_uid)
             uidAddRender = false;
         if (!user.vk_uid && !user.google_uid && !user.ya_uid)
@@ -198,7 +199,8 @@ exports.getLk = async (req, res) => {
             myLk,
             uidAddRender,
             uidDelRender,
-            have
+            have,
+            error
         })
     }
 }
@@ -253,6 +255,7 @@ exports.postApiAuth = async (req, res) => {
                     var user = await usersSchema.findOne({vk_uid: resp.data.uid});
                     if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : resp.data.uid})
                     else {
+                        res.cookie('error', 'Данный id уже привяз к другому аккаунту.');
                         res.redirect('/lk');
                         return;
                     }
@@ -261,6 +264,7 @@ exports.postApiAuth = async (req, res) => {
                     var user = await usersSchema.findOne({google_uid: resp.data.uid});
                     if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : resp.data.uid})
                     else {
+                        res.cookie('error', 'Данный id уже привяз к другому аккаунту.');
                         res.redirect('/lk');
                         return;
                     }
@@ -269,6 +273,7 @@ exports.postApiAuth = async (req, res) => {
                     var user = await usersSchema.findOne({ya_uid: resp.data.uid});
                     if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
                     else {
+                        res.cookie('error', 'Данный id уже привяз к другому аккаунту.');
                         res.redirect('/lk');
                         return;
                     }
