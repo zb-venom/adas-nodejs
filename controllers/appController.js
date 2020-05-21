@@ -242,6 +242,7 @@ exports.getSearch = async (req, res) => {
             Search: true,
             status,
             search: req.params.search,
+            type: req.params.type,
             device
         })
     }
