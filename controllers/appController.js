@@ -186,13 +186,16 @@ exports.getLk = async (req, res) => {
             have[i] = Object.assign({name: device.name}, auditory[i])
         }
         if (user.vk_uid && user.google_uid && user.ya_uid)
-            uidRender = false;
+            uidAddRender = false;
+        if (!user.vk_uid && !user.google_uid && !user.ya_uid)
+            uidDelRender = false;
         res.render('lk', {
             title: 'Личный кабинет',
             status,
             user: user,
             myLk,
-            uidRender,
+            uidAddRender,
+            uidDelRender,
             have
         })
     }
