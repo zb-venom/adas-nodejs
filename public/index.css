@@ -11,6 +11,20 @@
     text-decoration: none;
 }
 
+.network {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.a-network {
+    font-size: 0.7rem;
+    color: tomato;
+}
+
+.a-network:hover, .a-network:focus {
+    color: red;
+}
+
 .index {
     background: rgb(14, 14, 24);
     max-width: 100vw;
