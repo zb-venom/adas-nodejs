@@ -249,9 +249,30 @@ exports.postApiAuth = async (req, res) => {
         if (req.body.token)  {                    
             await axios.get('http://ulogin.ru/token.php?token='+req.body.token+'&host=https://adas-tusur.herokuapp.com/')
             .then(async function (resp) {
-                if (resp.data.network == 'vkontakte') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : resp.data.uid})
-                if (resp.data.network == 'google') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : resp.data.uid})     
-                if (resp.data.network == 'yandex') await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
+                if (resp.data.network == 'vkontakte') { 
+                    var user = await usersSchema.findOne({vk_uid: resp.data.uid});
+                    if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'vk_uid' : resp.data.uid})
+                    else {
+                        res.redirect('/lk');
+                        return;
+                    }
+                }
+                if (resp.data.network == 'google') { 
+                    var user = await usersSchema.findOne({google_uid: resp.data.uid});
+                    if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'google_uid' : resp.data.uid})
+                    else {
+                        res.redirect('/lk');
+                        return;
+                    }
+                }
+                if (resp.data.network == 'yandex') { 
+                    var user = await usersSchema.findOne({ya_uid: resp.data.uid});
+                    if (!user) await usersSchema.findByIdAndUpdate(req.cookies._id, { 'ya_uid' :resp.data.uid})
+                    else {
+                        res.redirect('/lk');
+                        return;
+                    }
+                }
                 console.log('Пользователь (_id: '+req.cookies._id+') успешно привязал '+resp.data.network+' (uid: '+resp.data.uid+').');     
             });
         }    

@@ -11,15 +11,15 @@ const userSchema = new Schema({
     new_password_hash: String,
     vk_uid: {
         type: String,
-        default: 0
+        default: ''
     },
     google_uid: {
         type: String,
-        default: 0
+        default: ''
     },
     ya_uid: {
         type: String,
-        default: 0
+        default: ''
     },
     type: {
         type: Number,
