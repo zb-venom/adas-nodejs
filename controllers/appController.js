@@ -212,12 +212,12 @@ exports.getSearch = async (req, res) => {
     if (!status.online)  res.redirect('/')
     else {
         console.log(req.query.type)
-        if (!req.params.search) var device = await devicesSchema.find({}).lean(); 
+        if (!req.query.search) var device = await devicesSchema.find({}).lean(); 
         else var device = await devicesSchema.find({ 
             $or: [ 
-                { about: { $regex: req.params.search, $options: '-i' } }, 
-                { name: { $regex: req.params.search, $options: '-i'  } },
-                { type: { $regex: req.params.search, $options: '-i'  } }
+                { about: { $regex: req.query.search, $options: '-i' } }, 
+                { name: { $regex: req.query.search, $options: '-i'  } },
+                { type: { $regex: req.query.search, $options: '-i'  } }
             ] 
         }).lean() 
         const have = []
@@ -234,7 +234,7 @@ exports.getSearch = async (req, res) => {
             title: 'Поиск оборудования',
             Search: true,
             status,
-            search: req.params.search,
+            search: req.query.search,
             device
         })
     }
