@@ -8,7 +8,7 @@
             {{#each device}}
                 <div class="col">
                     <div class="device-box">
-                        <form onsubmit="return shure()" action="/edit/delete" method="post" class="delete">
+                        <form onsubmit="return shure()" action="/device/delete" method="post" class="delete">
                             <input type="text" name="_id" value="{{_id}}" hidden>
                             <button type="submit" class="close" style="color: white; margin-top: -.5rem" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </form>
