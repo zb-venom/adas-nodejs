@@ -29,6 +29,7 @@
 .logs {
     margin: .25rem;
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
     color: white;
 }
@@ -37,6 +38,7 @@
     grid-column: span 2;
     margin: .25rem;
     font-size: 2rem;
+    text-align: center;
 }
 
 .logs-body {
