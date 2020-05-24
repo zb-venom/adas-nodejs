@@ -65,12 +65,16 @@ exports.deleteDevice = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }  
+    console.log(req.body._id)
     await devicesSchema.findByIdAndDelete(req.body._id)
     var auditories = await auditorySchema.find({ device_id: req.body._id } ).lean()
+    console.log(auditories)
+    console.log(auditories.length)
     for (var i =0; i < auditories.length; i++) {
+        console.log(auditories._id)
         await auditorySchema.findByIdAndDelete(auditories[i]._id);
     }
-    res.redirect('/users')
+    res.redirect('/edit')
 }
 
 exports.getDevices = async (req, res) => {
