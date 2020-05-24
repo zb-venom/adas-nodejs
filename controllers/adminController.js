@@ -112,11 +112,11 @@ exports.addDevice = async (req, res) => {
     if (!status.admin) { res.redirect('/lk'); return; }
     if (req.body._id && req.body.code && req.body.auditory) { 
         var new_code = req.body.code    
-        var check = await usersSchema.findOne({code: new_code})
-        while (check){
+        var checks = await usersSchema.findOne({code: new_code})
+        while (checks){
             var date = new Date()
             var new_code = date.getTime()+'0'+(date.getSeconds()+10)            
-            check = await usersSchema.findOne({code: new_code})
+            checks = await usersSchema.findOne({code: new_code})
         }
         const new_device = new auditorySchema({
             device_id: req.body._id,
