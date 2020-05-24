@@ -2,10 +2,15 @@
     <div class="logs-head">Журнал</div>
     <hr>
     <div class="logs-body">
-        <p class="log">Пользователь&nbsp;:&nbsp;Оборудование&nbsp;:&nbsp;Получил&nbsp;:&nbsp;Вернул</p> 
-        {{#each logs}}
-            <br>
-            <p class="log">{{user}}&nbsp;:&nbsp;{{device}} (id: {{device_id}})&nbsp;:&nbsp;{{received}}&nbsp;:&nbsp;{{returned}}</p>
+        <label class="col-2">Пользователь</label>
+        <label class="col-2">Оборудование</label>
+        <label class="col-2">Получил</label>
+        <label class="col-2">Вернул</label>
+        {{#each logs}}            
+            <label class="col-2">Пользователь</label>
+            <label class="col-2">Оборудование</label>
+            <label class="col-2">Получил</label>
+            <label class="col-2">Вернул</label>
         {{/each}}
         </div>
 </div>

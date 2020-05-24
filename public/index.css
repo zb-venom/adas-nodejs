@@ -30,6 +30,7 @@
     margin: .25rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    color: white;
 }
 
 .logs-head {
@@ -38,9 +39,51 @@
     font-size: 2rem;
 }
 
-.p-logs {
+.logs-body {
+    grid-column: span 2;
     margin: .25rem;
-    color: white;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.col-8 {
+    grid-column: span 8;
+    margin: .25rem;
+}
+
+.col-7 {
+    grid-column: span 7;
+    margin: .25rem;
+}
+
+.col-6 {
+    grid-column: span 6;
+    margin: .25rem;
+}
+
+.col-5 {
+    grid-column: span 5;
+    margin: .25rem;
+}
+
+.col-4 {
+    grid-column: span 4;
+    margin: .25rem;
+}
+
+.col-3 {
+    grid-column: span 3;
+    margin: .25rem;
+}
+
+.col-2 {
+    grid-column: span 2;
+    margin: .25rem;
+}
+
+.col-1 {
+    grid-column: span 1;
+    margin: .25rem;
 }
 
 .index {
