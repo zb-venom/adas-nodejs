@@ -66,7 +66,10 @@ exports.deleteDevice = async (req, res) => {
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }  
     await devicesSchema.findByIdAndDelete(req.body._id)
-    await auditorySchema.find({ device_id: req.body._id } )
+    var auditories = await auditorySchema.find({ device_id: req.body._id } ).lean()
+    for (var i =0; i < auditories.length; i++) {
+        await auditorySchema.findByIdAndDelete(auditories[i]._id);
+    }
     res.redirect('/users')
 }
 
