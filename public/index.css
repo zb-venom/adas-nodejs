@@ -28,21 +28,17 @@
 
 .logs {
     margin: .25rem;
-    display: grid;
     width: 100%;
-    grid-template-columns: repeat(2, 1fr);
     color: white;
 }
 
 .logs-head {
-    grid-column: span 2;
     margin: .25rem;
     font-size: 2rem;
     text-align: center;
 }
 
 .logs-body {
-    grid-column: span 2;
     margin: .25rem;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -52,48 +48,56 @@
     grid-column: span 8;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-7 {
     grid-column: span 7;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-6 {
     grid-column: span 6;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-5 {
     grid-column: span 5;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-4 {
     grid-column: span 4;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-3 {
     grid-column: span 3;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-2 {
     grid-column: span 2;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .col-1 {
     grid-column: span 1;
     margin: .25rem;
     text-align: center;
+    width: 100%;
 }
 
 .index {
