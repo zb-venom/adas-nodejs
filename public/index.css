@@ -301,8 +301,8 @@ a:hover {
     border-radius: .3rem;
     margin: 1rem -0.25rem 1rem .5rem;
     width: 300px;
-    min-height: 380px;
-    max-height: 380px;
+    min-height: 400px;
+    max-height: 400px;
     padding: 1rem;
 }
 

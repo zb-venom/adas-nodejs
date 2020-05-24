@@ -31,6 +31,7 @@ router.route('/logs').get(appController.getLogs)
 
 router.route('/edit').get(adminController.getEdit).post(adminController.postEdit);
 router.route('/edit/:search').get(adminController.getEdit).post(adminController.postEdit);
+router.route('/edit/delete').post(adminController.deleteDevice);
 
 router.route('/devices').get(adminController.getDevices).post(adminController.postDevices);
 router.route('/devices/:search').get(adminController.getDevices).post(adminController.postDevices);

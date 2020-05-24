@@ -61,6 +61,15 @@ exports.postEdit = async (req, res) => {
         res.redirect('/edit/'+req.body.search)
 }
 
+exports.deleteDevice = async (req, res) => {
+    var status = await check.check(req, res);
+    if (!status.online) { res.redirect('/'); return; }
+    if (!status.admin) { res.redirect('/lk'); return; }  
+    await devicesSchema.findByIdAndDelete(req.body._id)
+    await auditorySchema.find({ device_id: req.body._id } )
+    res.redirect('/users')
+}
+
 exports.getDevices = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
