@@ -1,9 +1,11 @@
-
-
 <div class="logs">
-    <p class="p-logs">Пользователь&nbsp;:&nbsp;Оборудование&nbsp;:&nbsp;Получил&nbsp;:&nbsp;Вернул</p> 
-    {{#each logs}}
-        <br>
-        <p class="p-logs">{{user}}&nbsp;:&nbsp;{{device}} (id: {{device_id}})&nbsp;:&nbsp;{{received}}&nbsp;:&nbsp;{{returned}}</p>
-    {{/each}}
+    <div class="logs-head">Журнал</div>
+    <hr>
+    <div class="logs-body">
+        <p class="log">Пользователь&nbsp;:&nbsp;Оборудование&nbsp;:&nbsp;Получил&nbsp;:&nbsp;Вернул</p> 
+        {{#each logs}}
+            <br>
+            <p class="log">{{user}}&nbsp;:&nbsp;{{device}} (id: {{device_id}})&nbsp;:&nbsp;{{received}}&nbsp;:&nbsp;{{returned}}</p>
+        {{/each}}
+        </div>
 </div>

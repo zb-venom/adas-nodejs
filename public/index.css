@@ -28,7 +28,14 @@
 
 .logs {
     margin: .25rem;
-    display: inline;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.logs-head {
+    grid-column: span 2;
+    margin: .25rem;
+    font-size: 2rem;
 }
 
 .p-logs {
