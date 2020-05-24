@@ -50,56 +50,56 @@
     color: grey;
 }
 
-.col-8 {
+.colm-8 {
     grid-column: span 8;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-7 {
+.colm-7 {
     grid-column: span 7;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-6 {
+.colm-6 {
     grid-column: span 6;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-5 {
+.colm-5 {
     grid-column: span 5;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-4 {
+.colm-4 {
     grid-column: span 4;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-3 {
+.colm-3 {
     grid-column: span 3;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-2 {
+.colm-2 {
     grid-column: span 2;
     margin: .25rem;
     text-align: center;
     width: 100%;
 }
 
-.col-1 {
+.colm-1 {
     grid-column: span 1;
     margin: .25rem;
     text-align: center;
