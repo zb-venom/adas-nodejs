@@ -46,8 +46,7 @@
 
 .line {
     grid-column: span 8;
-    background-color: grey;
-    color: grey;
+    border-bottom: 2px solid rgb(11, 167, 0);
 }
 
 .colm-8 {
