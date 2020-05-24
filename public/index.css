@@ -44,6 +44,12 @@
     grid-template-columns: repeat(8, 1fr);
 }
 
+.line {
+    grid-column: span 8;
+    background-color: grey;
+    color: grey;
+}
+
 .col-8 {
     grid-column: span 8;
     margin: .25rem;
