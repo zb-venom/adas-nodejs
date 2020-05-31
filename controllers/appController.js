@@ -121,6 +121,7 @@ exports.postReg = async (req, res) => {
     }
 }
 
+
 exports.getNewPassword = async (req, res) => {
     var status = await check.check(req, res);
     if (status.online)  res.redirect('/lk');

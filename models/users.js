@@ -25,7 +25,6 @@ const userSchema = new Schema({
         type: Number,
         default: 0
     },
-    token: String,
     code: String,
     created: { 
         type: Date,

@@ -37,7 +37,6 @@ app.use(cookieParser('secret key'))
 
 const db = 'mongodb+srv://'+config.login+':'+config.password+'@'+config.cluster+'/adas';
 
-
 async function start() {
     try {
         await mongoose.connect(
@@ -49,7 +48,7 @@ async function start() {
             }
         )
         app.listen(PORT, () => {
-            console.log('\nСервер запущен...\nПриложение доступно по ссылке http://localhost:3000\n'.green)
+            console.log('\nСервер запущен...'.green)
         })
     } catch (e) {
         console.log(e)
