@@ -272,9 +272,9 @@ exports.getLogs = async (req, res) => {
         var logs = await logsSchema.find({}).lean() 
         for (var i = 0; i < logs.length; i++){
             user = await usersSchema.findById(logs[i].user_id).lean();
-            logs[i].user = user.about ? user.about : logs[i].user_id;
+            logs[i].user = user ? user.about : logs[i].user_id;
             device = await devicesSchema.findById(logs[i].device_id).lean();
-            logs[i].device = device.name ? device.name : logs[i].device_id;
+            logs[i].device = device ? device.name : logs[i].device_id;
             console.log(logs[i].user_id)
             console.log(user)
             console.log(logs[i].user)
