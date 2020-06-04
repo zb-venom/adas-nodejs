@@ -221,23 +221,27 @@ exports.editFormUser = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }
-    else var users = await usersSchema.findById(req.params._id)
-    var have = []
-    for (i = 0; users.length > i; i++) {
-        if (users[i].type == 1)
-            var full_type = 'Администратор'
-        else if (users[i].type == 0)
-            var full_type = 'Не подтвержден'
-        else if (users[i].type == 2)
-            var full_type = 'Студент'
-        have[i] = Object.assign(users[i], {full_type: full_type})
-    } 
-    res.render('user', {
-        title: 'Редактировать пользователя',
-        Users: true,
-        status,
-        have
-    })
+    else {
+        var users = await usersSchema.findById(req.params._id)
+        console.log(req.params._id)
+        console.log(users)
+        var have = []
+        for (i = 0; users.length > i; i++) {
+            if (users[i].type == 1)
+                var full_type = 'Администратор'
+            else if (users[i].type == 0)
+                var full_type = 'Не подтвержден'
+            else if (users[i].type == 2)
+                var full_type = 'Студент'
+            have[i] = Object.assign(users[i], {full_type: full_type})
+        } 
+        res.render('user', {
+            title: 'Редактировать пользователя',
+            Users: true,
+            status,
+            have
+        })
+    }
 }
 
 exports.editUser = async (req, res) => {
