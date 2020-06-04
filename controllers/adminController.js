@@ -246,7 +246,7 @@ exports.editUser = async (req, res) => {
     if (!status.admin) { res.redirect('/lk'); return; }
     if (req.body.about && req.body.login && req.body._id && req.body.email 
         && req.body.type && req.body.phone && req.body.code) {            
-        const user = await usersSchema.findByIdAndUpdate(req.body._id, {
+        await usersSchema.findByIdAndUpdate(req.body._id, {
             about: req.body.about,
             type: req.body.type,
             login: req.body.login.toLocaleLowerCase(),
@@ -256,7 +256,7 @@ exports.editUser = async (req, res) => {
         })
         console.log(req.body.new_password)
         if (req.body.new_password)
-        const user = await usersSchema.findByIdAndUpdate(req.body._id, {
+        await usersSchema.findByIdAndUpdate(req.body._id, {
             new_password: true,
             password:  hsh.getHash('1234567890', 'salt'),
             salt: 'salt'
