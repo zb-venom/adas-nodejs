@@ -8,6 +8,9 @@
             {{#each have}}
                 <div class="col">
                     <div class="user-box">
+                        <form class="delete">
+                            <a href="/user/edit/{{_id}}">Изменить</a>
+                        </form>
                         <form onsubmit="return shure()" action="/user/delete" method="post" class="delete">
                             <input type="text" name="_id" value="{{_id}}" hidden>
                             <button type="submit" class="close" style="color: white; margin-top: -.5rem" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

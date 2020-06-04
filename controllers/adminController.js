@@ -84,7 +84,6 @@ exports.getDevices = async (req, res) => {
     if (!req.params.search) var device = await devicesSchema.find({}).lean()   
     else var device = await devicesSchema.find({ 
         $or: [ 
-            { code: { $regex: req.params.search, $options: '-i' } }, 
             { name: { $regex: req.params.search, $options: '-i'  } },
             { type: { $regex: req.params.search, $options: '-i'  } }
         ] 
