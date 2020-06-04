@@ -245,8 +245,7 @@ exports.editUser = async (req, res) => {
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }
     if (req.body.about && req.body.login && req.body._id && req.body.email 
-        && req.body.type && req.body.phone && req.body.code) { 
-        console.log('good')           
+        && req.body.type && req.body.phone && req.body.code) {      
         await usersSchema.findByIdAndUpdate(req.body._id, {
             about: req.body.about,
             type: req.body.type,
@@ -255,7 +254,6 @@ exports.editUser = async (req, res) => {
             phone: req.body.phone,
             code: req.body.code
         })
-        console.log(req.body.new_password)
         if (req.body.new_password)
         await usersSchema.findByIdAndUpdate(req.body._id, {
             new_password: true,
@@ -265,8 +263,7 @@ exports.editUser = async (req, res) => {
         console.log('Пользователь (_id: '+req.cookies._id+') изменил пользователя '+req.body.login+' (_id: '+req.body._id+').');
         res.redirect('/users')
     }
-    else { console.log(req.body.about); console.log(req.body.login); console.log(req.body._id); console.log(req.body.email);
-        console.log(req.body.type); console.log(req.body.phone); console.log(req.body.code); res.redirect('/users')  }
+    else { res.redirect('/users')  }
 
 }
 
