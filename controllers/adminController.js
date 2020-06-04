@@ -254,6 +254,7 @@ exports.editUser = async (req, res) => {
             phone: req.body.phone,
             code: req.body.code
         })
+        console.log(req.body.new_password)
         if (req.body.new_password)
         const user = await usersSchema.findByIdAndUpdate(req.body._id, {
             new_password: true,
