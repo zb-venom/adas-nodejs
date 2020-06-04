@@ -226,15 +226,13 @@ exports.editFormUser = async (req, res) => {
         console.log(req.params._id)
         console.log(users)
         var have = []
-        for (i = 0; users.length > i; i++) {
-            if (users[i].type == 1)
-                var full_type = 'Администратор'
-            else if (users[i].type == 0)
-                var full_type = 'Не подтвержден'
-            else if (users[i].type == 2)
-                var full_type = 'Студент'
-            have[i] = Object.assign(users[i], {full_type: full_type})
-        } 
+        if (users.type == 1)
+            var full_type = 'Администратор'
+        else if (users.type == 0)
+            var full_type = 'Не подтвержден'
+        else if (users.type == 2)
+            var full_type = 'Студент'
+        have[i] = Object.assign(users, {full_type: full_type})
         console.log(have)
         res.render('user', {
             title: 'Редактировать пользователя',
