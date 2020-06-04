@@ -232,7 +232,7 @@ exports.editFormUser = async (req, res) => {
             var full_type = 'Не подтвержден'
         else if (users.type == 2)
             var full_type = 'Студент'
-        have[i] = Object.assign(users, {full_type: full_type})
+        have[0] = Object.assign(users, {full_type: full_type})
         console.log(have)
         res.render('user', {
             title: 'Редактировать пользователя',
