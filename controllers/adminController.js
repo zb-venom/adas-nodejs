@@ -115,11 +115,11 @@ exports.addDevice = async (req, res) => {
     if (!status.admin) { res.redirect('/lk'); return; }
     if (req.body._id && req.body.code && req.body.auditory) { 
         var new_code = req.body.code    
-        var checks = await usersSchema.findOne({code: new_code})
+        var checks = await auditorySchema.findOne({code: new_code})
         while (checks){
             var date = new Date()
             var new_code = date.getTime()+'0'+(date.getSeconds()+10)            
-            checks = await usersSchema.findOne({code: new_code})
+            checks = await auditorySchema.findOne({code: new_code})
         }
         const new_device = new auditorySchema({
             device_id: req.body._id,
@@ -132,6 +132,16 @@ exports.addDevice = async (req, res) => {
     else
         res.redirect('/devices')
 }
+
+exports.deleteDevices = async (req, res) => {
+    var status = await check.check(req, res);
+    if (!status.online) { res.redirect('/'); return; }
+    if (!status.admin) { res.redirect('/lk'); return; }  
+    console.log(req.body._id)
+    await auditorySchema.findByIdAndDelete(req.body._id)
+    res.redirect('/devices')
+}
+
 
 exports.getUsers = async (req, res) => {
     var status = await check.check(req, res);
