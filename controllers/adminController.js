@@ -222,7 +222,7 @@ exports.editFormUser = async (req, res) => {
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }
     else {
-        var users = await usersSchema.findById(req.params._id)
+        var users = await usersSchema.findById(req.params._id).lean()
         console.log(req.params._id)
         console.log(users)
         var have = []
@@ -235,6 +235,7 @@ exports.editFormUser = async (req, res) => {
                 var full_type = 'Студент'
             have[i] = Object.assign(users[i], {full_type: full_type})
         } 
+        console.log(have)
         res.render('user', {
             title: 'Редактировать пользователя',
             Users: true,
