@@ -575,7 +575,7 @@ a:hover {
     background-color: rgb(7, 7, 27);
 }
 
-.colse:focus, .close:active {
+.close:focus, .close:active {
     border: none;
     outline: none !important;
 }
