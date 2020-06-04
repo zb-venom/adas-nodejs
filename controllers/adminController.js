@@ -254,6 +254,12 @@ exports.editUser = async (req, res) => {
             phone: req.body.phone,
             code: req.body.code
         })
+        if (req.body.new_password)
+        const user = await usersSchema.findByIdAndUpdate(req.body._id, {
+            new_password: true,
+            password:  hsh.getHash('1234567890', 'salt'),
+            salt: 'salt'
+        })
         console.log('Пользователь (_id: '+req.cookies._id+') изменил пользователя '+req.body.login+' (_id: '+req.body._id+').');
         res.redirect('/users')
     }
