@@ -279,7 +279,10 @@ exports.getLogs = async (req, res) => {
                 device = await devicesSchema.findById(auditory.device_id).lean();
             logs[i].device = device ? device.name : logs[i].device_id + ' (Устройство удалено из базы)';
             logs[i].received = moment(logs[i].received).utcOffset('GMT+07:00').format('lll');
-            logs[i].returned = moment(logs[i].returned).utcOffset('GMT+07:00').format('lll');
+            if (logs[i].returned)
+                logs[i].returned = moment(logs[i].returned).utcOffset('GMT+07:00').format('lll');
+            else    
+                logs[i].returned = "На руках"
         }
         res.render('logs', {
             title: 'Журнал',
