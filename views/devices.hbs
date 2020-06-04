@@ -18,7 +18,7 @@
                                 </select> } <button class="save-button" type="submit">+ добавить</button></code><br><code class="green"><-На местах-></code>
                             <div class="scroll-about">                            
                                 {{#each auditory}}
-                                        <code>{ Код: {{code}} => Аудитория: {{auditory}} } <a href="/devices/delete/{{_id}}">- удалить</a></code><br><code class="green"><--------------></code><br>
+                                        <code>{ Код: {{code}} => Аудитория: {{auditory}} } <a href="/devices/delete/{{_id}}" onclick="return shure()">- удалить</a></code><br><code class="green"><--------------></code><br>
                                 {{/each}}  
                             </div>       
                             <span class="device-type">{{type}}</span>
@@ -41,3 +41,9 @@
         {{/if}}
     </div>
 </div>  
+<script>
+    
+function shure() {
+    return confirm("Вы уверены?")  
+}
+</script>
