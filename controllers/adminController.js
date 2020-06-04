@@ -140,8 +140,8 @@ exports.deleteDevices = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }  
-    console.log(req.body._id)
-    await auditorySchema.findByIdAndDelete(req.body._id)
+    console.log(req.params._id)
+    await auditorySchema.findByIdAndDelete(req.params._id)
     res.redirect('/devices')
 }
 
