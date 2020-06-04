@@ -274,7 +274,7 @@ exports.getLogs = async (req, res) => {
             user = await usersSchema.findById(logs[i].user_id).lean();
             logs[i].user = user ? user.about : logs[i].user_id + ' (Пользователь удалён из базы)';
             auditory = await auditorySchema.findById(logs[i].device_id);
-            var device;
+            var device = '';
             if (auditory)
                 device = await devicesSchema.findById(auditory.device_id).lean();
             logs[i].device = device ? device.name : logs[i].device_id + ' (Устройство удалено из базы)';
