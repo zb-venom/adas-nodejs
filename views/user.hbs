@@ -1,0 +1,70 @@
+<div class="con-search">
+    <div class="row">
+        {{#if have}}
+            {{#each have}}
+                <div class="col">
+                    <div class="user-box">                        
+                        <form action="/user/edit" method="post">
+                            <h6>Логин: {{login}}</h6> <input type="text" name="login" value="{{login}}" hidden>
+                            <hr>
+                            <h6>ID: <a href="/lk/{{_id}}" target="_blank" rel="noopener noreferrer">{{_id}}</a></h6> <input type="text" name="_id" value="{{_id}}" hidden>
+                            {{#if code}}
+                                <h6>Тип: {{full_type}}</h6> <input type="text" name="type" value="{{type}}" hidden>
+                            {{else}}
+                            <h6>Тип: 
+                                <select name="type" class="select-type">
+                                    <option value="0" disabled>Не подтвержден</option>
+                                    <option value="2">Студент</option>
+                                    <option value="1">Администратор</option>
+                                </select>
+                            </h6>
+                            {{/if}}
+                            <h6>Инфо: {{about}}</h6> <input type="text" name="about" value="{{about}}" hidden>
+                            <h6>Мыло: {{email}}</h6><input type="text" name="email" value="{{email}}" hidden>
+                            <h6>Тел: {{phone}}</h6><input type="text" name="phone" value="{{phone}}" hidden>
+                            {{#if code}}
+                            <div style="margin: 1rem; text-align: center;" >
+                                <input type="text" class="input-code" value="{{code}}" disabled>
+                                <input type="text" name="code" value="{{code}}" hidden> <br><br>
+                                <a href="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data={{code}}&download=true" target="_blank" rel="noopener noreferrer" download><img src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&amp;data={{code}}&bgcolor=0-200-0&color=7-7-27"></a>
+                            </div>
+                            {{else}}
+                                <div style="margin: 1rem; text-align: center;" >
+                                    <input type="text" class="input-code" value="{{new_code}}" disabled>
+                                    <input type="text" name="code" value="{{new_code}}" hidden> 
+                                    <button type="submit" class="save-button-user">Подтвердить</button>
+                                </div>
+                            {{/if}}
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+        <div class="col">
+            <div class="device-box">
+                <h2>Ошибка.</h2>
+                <hr>
+                <div class="scroll-about">
+                    <code class="red">По вашему запросу ничего не найдено.</code>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>  
+
+<script>
+        
+$(function(){
+  $("#phone").mask('+7(000)-000-00-00');  
+});
+
+$("#new_span").click(function(){
+    $('#new_span').hide();
+    $('#new_form').show();
+});
+
+function shure() {
+    return confirm("Вы уверены?")  
+}
+</script>
