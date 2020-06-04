@@ -36,6 +36,7 @@ router.route('/device/delete').post(adminController.deleteDevice);
 router.route('/devices').get(adminController.getDevices).post(adminController.postDevices);
 router.route('/devices/:search').get(adminController.getDevices).post(adminController.postDevices);
 router.route('/device/add').post(adminController.addDevice);
+router.route('/devices/delete/:_id').get(adminController.deleteDevices);
 
 router.route('/users').get(adminController.getUsers).post(adminController.postUsers);
 router.route('/users/:search').get(adminController.getUsers).post(adminController.postUsers);
