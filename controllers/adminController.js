@@ -223,8 +223,6 @@ exports.editFormUser = async (req, res) => {
     if (!status.admin) { res.redirect('/lk'); return; }
     else {
         var users = await usersSchema.findById(req.params._id).lean()
-        console.log(req.params._id)
-        console.log(users)
         var have = []
         if (users.type == 1)
             var full_type = 'Администратор'
@@ -233,7 +231,6 @@ exports.editFormUser = async (req, res) => {
         else if (users.type == 2)
             var full_type = 'Студент'
         have[0] = Object.assign(users, {full_type: full_type})
-        console.log(have)
         res.render('user', {
             title: 'Редактировать пользователя',
             Users: true,
@@ -247,7 +244,7 @@ exports.editUser = async (req, res) => {
     var status = await check.check(req, res);
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }
-    if (req.body.about && req.body.login && req.body._id && req.body.email 
+    /*if (req.body.about && req.body.login && req.body._id && req.body.email 
         && req.body.type && req.body.phone && req.body.code) {            
         await usersSchema.findByIdAndUpdate(req.body._id, {
             about: req.body.about,
@@ -266,8 +263,8 @@ exports.editUser = async (req, res) => {
         })
         console.log('Пользователь (_id: '+req.cookies._id+') изменил пользователя '+req.body.login+' (_id: '+req.body._id+').');
         res.redirect('/users')
-    }
-    else res.redirect('/users')   
+    }*/
+    else { console.log(req.body.new_password); console.log(req.body.login); res.redirect('/users')  }
 
 }
 
