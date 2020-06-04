@@ -82,10 +82,13 @@ exports.getDevices = async (req, res) => {
     if (!status.online) { res.redirect('/'); return; }
     if (!status.admin) { res.redirect('/lk'); return; }
     if (!req.params.search) var device = await devicesSchema.find({}).lean()   
-    else var device = await devicesSchema.find( { $or : [ 
-       { name: { $regex: req.params.search, $options: '-i'  } },
-       { code: { $regex: req.params.search, $options: '-i'  } }
-    ] } ).lean()   
+    else var device = await devicesSchema.find({ 
+        $or: [ 
+            { code: { $regex: req.params.search, $options: '-i' } }, 
+            { name: { $regex: req.params.search, $options: '-i'  } },
+            { type: { $regex: req.params.search, $options: '-i'  } }
+        ] 
+    }).lean()    
     const have = []
     var date = new Date()
     var new_code = date.getTime()+'0'+(date.getSeconds()+10)
