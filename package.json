@@ -15,7 +15,7 @@
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
+    "express-handlebars": "^5.3.1",
     "jQuery": "^1.7.4",
     "js-md5": "^0.7.3",
     "jsdom": "^16.2.2",
